@@ -28,19 +28,10 @@ public class Veiculo implements Serializable {
   )
   private int id_gps;
 
-  @Column(
-      nullable = true
-  )
   private String estado_gps;
 
-  @Column(
-      nullable = false
-  )
   private String nome_condutor;
 
-  @Column(
-      nullable = true
-  )
   private String telefone_condutor;
 
   @Column(

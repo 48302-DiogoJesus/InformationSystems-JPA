@@ -25,19 +25,10 @@ public class Registo implements Serializable {
   )
   private int id_gps;
 
-  @Column(
-      nullable = true
-  )
   private String longitude;
 
-  @Column(
-      nullable = true
-  )
   private String latitude;
 
-  @Column(
-      nullable = true
-  )
   private Timestamp marca_temporal;
 
   public Registo() {

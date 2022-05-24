@@ -18,9 +18,6 @@ public class Cliente implements Serializable {
   )
   private String nif;
 
-  @Column(
-      nullable = true
-  )
   private String referenciador;
 
   @Column(
