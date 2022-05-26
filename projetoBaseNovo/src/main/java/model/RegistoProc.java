@@ -1,9 +1,7 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 
 @Entity
@@ -12,19 +10,18 @@ import java.io.Serializable;
 )
 public class RegistoProc implements Serializable {
   @Id
-  @Column(
-      nullable = false
-  )
-  private int id_registo;
+  @JoinColumn(name = "id_registo", nullable = false)
+  @OneToOne
+  private Registo id_registo;
 
   public RegistoProc() {
   }
 
-  public int getId_registo() {
-    return this.id_registo;
+  public Registo getId_registo() {
+    return id_registo;
   }
 
-  public void setId_registo(int id_registo) {
+  public void setId_registo(Registo id_registo) {
     this.id_registo = id_registo;
   }
 }

@@ -20,10 +20,9 @@ public class Registo implements Serializable {
   )
   private int id;
 
-  @Column(
-      nullable = false
-  )
-  private int id_gps;
+  @JoinColumn(name = "id_gps", nullable = false)
+  @ManyToOne
+  private Gps id_gps;
 
   private String longitude;
 
@@ -40,14 +39,6 @@ public class Registo implements Serializable {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  public int getId_gps() {
-    return this.id_gps;
-  }
-
-  public void setId_gps(int id_gps) {
-    this.id_gps = id_gps;
   }
 
   public String getLongitude() {
@@ -72,5 +63,13 @@ public class Registo implements Serializable {
 
   public void setMarca_temporal(Timestamp marca_temporal) {
     this.marca_temporal = marca_temporal;
+  }
+
+  public Gps getId_gps() {
+    return id_gps;
+  }
+
+  public void setId_gps(Gps id_gps) {
+    this.id_gps = id_gps;
   }
 }

@@ -1,9 +1,7 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.lang.String;
 
@@ -18,17 +16,17 @@ public class Veiculo implements Serializable {
   )
   private String matricula;
 
-  @Column(
-      nullable = false
-  )
-  private String id_cliente;
+  @JoinColumn(name = "id_cliente", nullable = false)
+  @ManyToOne
+  private Cliente id_cliente;
 
-  @Column(
-      nullable = false
-  )
-  private int id_gps;
+  @JoinColumn(name = "id_gps", nullable = false)
+  @OneToOne
+  private Gps id_gps;
 
-  private String estado_gps;
+  @JoinColumn(name = "estado_gps", nullable = false)
+  @OneToOne
+  private EstadosGps estado_gps;
 
   private String nome_condutor;
 
@@ -48,30 +46,6 @@ public class Veiculo implements Serializable {
 
   public void setMatricula(String matricula) {
     this.matricula = matricula;
-  }
-
-  public String getId_cliente() {
-    return this.id_cliente;
-  }
-
-  public void setId_cliente(String id_cliente) {
-    this.id_cliente = id_cliente;
-  }
-
-  public int getId_gps() {
-    return this.id_gps;
-  }
-
-  public void setId_gps(int id_gps) {
-    this.id_gps = id_gps;
-  }
-
-  public String getEstado_gps() {
-    return this.estado_gps;
-  }
-
-  public void setEstado_gps(String estado_gps) {
-    this.estado_gps = estado_gps;
   }
 
   public String getNome_condutor() {
@@ -96,5 +70,29 @@ public class Veiculo implements Serializable {
 
   public void setNum_alarmes(int num_alarmes) {
     this.num_alarmes = num_alarmes;
+  }
+
+  public EstadosGps getEstado_gps() {
+    return estado_gps;
+  }
+
+  public void setEstado_gps(EstadosGps estado_gps) {
+    this.estado_gps = estado_gps;
+  }
+
+  public Cliente getId_cliente() {
+    return id_cliente;
+  }
+
+  public void setId_cliente(Cliente id_cliente) {
+    this.id_cliente = id_cliente;
+  }
+
+  public Gps getId_gps() {
+    return id_gps;
+  }
+
+  public void setId_gps(Gps id_gps) {
+    this.id_gps = id_gps;
   }
 }

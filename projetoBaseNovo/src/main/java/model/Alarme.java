@@ -19,15 +19,13 @@ public class Alarme implements Serializable {
   )
   private int id;
 
-  @Column(
-      nullable = false
-  )
-  private int id_registo;
+  @JoinColumn(name = "id_registo", nullable = false)
+  @ManyToOne
+  private Registo id_registo;
 
-  @Column(
-      nullable = false
-  )
-  private String id_veiculo;
+  @JoinColumn(name = "id_veiculo",  nullable = false)
+  @ManyToOne
+  private Veiculo id_veiculo;
 
   public Alarme() {
   }
@@ -40,19 +38,19 @@ public class Alarme implements Serializable {
     this.id = id;
   }
 
-  public int getId_registo() {
-    return this.id_registo;
+  public Registo getId_registo() {
+    return id_registo;
   }
 
-  public void setId_registo(int id_registo) {
+  public void setId_registo(Registo id_registo) {
     this.id_registo = id_registo;
   }
 
-  public String getId_veiculo() {
-    return this.id_veiculo;
+  public Veiculo getId_veiculo() {
+    return id_veiculo;
   }
 
-  public void setId_veiculo(String id_veiculo) {
+  public void setId_veiculo(Veiculo id_veiculo) {
     this.id_veiculo = id_veiculo;
   }
 }

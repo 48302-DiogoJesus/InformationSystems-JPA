@@ -1,9 +1,7 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.lang.String;
 
@@ -13,10 +11,9 @@ import java.lang.String;
 )
 public class ClienteParticular implements Serializable {
   @Id
-  @Column(
-      nullable = false
-  )
-  private String id_cliente;
+  @JoinColumn(name = "id_cliente", nullable = false)
+  @OneToOne
+  private Cliente id_cliente;
 
   @Column(
       nullable = false
@@ -26,19 +23,19 @@ public class ClienteParticular implements Serializable {
   public ClienteParticular() {
   }
 
-  public String getId_cliente() {
-    return this.id_cliente;
-  }
-
-  public void setId_cliente(String id_cliente) {
-    this.id_cliente = id_cliente;
-  }
-
   public String getCc() {
     return this.cc;
   }
 
   public void setCc(String cc) {
     this.cc = cc;
+  }
+
+  public Cliente getId_cliente() {
+    return id_cliente;
+  }
+
+  public void setId_cliente(Cliente id_cliente) {
+    this.id_cliente = id_cliente;
   }
 }

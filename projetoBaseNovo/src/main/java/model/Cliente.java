@@ -1,9 +1,7 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.lang.String;
 
@@ -18,7 +16,9 @@ public class Cliente implements Serializable {
   )
   private String nif;
 
-  private String referenciador;
+  @ManyToOne
+  @JoinColumn(name = "referenciador", nullable = false)
+  private Cliente referenciador;
 
   @Column(
       nullable = false
@@ -51,11 +51,11 @@ public class Cliente implements Serializable {
     this.nif = nif;
   }
 
-  public String getReferenciador() {
+  public Cliente getReferenciador() {
     return this.referenciador;
   }
 
-  public void setReferenciador(String referenciador) {
+  public void setReferenciador(Cliente referenciador) {
     this.referenciador = referenciador;
   }
 

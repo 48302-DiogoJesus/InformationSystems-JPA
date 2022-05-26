@@ -19,10 +19,9 @@ public class ZonaVerde implements Serializable {
   )
   private int id;
 
-  @Column(
-      nullable = false
-  )
-  private String id_veiculo;
+  @JoinColumn(name = "id_veiculo", nullable = false)
+  @ManyToOne
+  private Veiculo id_veiculo;
 
   @Column(
       nullable = false
@@ -50,14 +49,6 @@ public class ZonaVerde implements Serializable {
     this.id = id;
   }
 
-  public String getId_veiculo() {
-    return this.id_veiculo;
-  }
-
-  public void setId_veiculo(String id_veiculo) {
-    this.id_veiculo = id_veiculo;
-  }
-
   public String getLongitude() {
     return this.longitude;
   }
@@ -80,5 +71,13 @@ public class ZonaVerde implements Serializable {
 
   public void setRaio(int raio) {
     this.raio = raio;
+  }
+
+  public Veiculo getId_veiculo() {
+    return id_veiculo;
+  }
+
+  public void setId_veiculo(Veiculo id_veiculo) {
+    this.id_veiculo = id_veiculo;
   }
 }
