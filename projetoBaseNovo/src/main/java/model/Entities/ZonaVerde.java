@@ -1,6 +1,7 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -9,7 +10,7 @@ import java.lang.String;
 @Table(
     name = "zona_verde"
 )
-public class ZonaVerde implements Serializable {
+public class ZonaVerde implements Serializable, JPAEntity<Integer> {
   @Id
   @GeneratedValue(
       strategy = GenerationType.SEQUENCE
@@ -79,5 +80,10 @@ public class ZonaVerde implements Serializable {
 
   public void setId_veiculo(Veiculo id_veiculo) {
     this.id_veiculo = id_veiculo;
+  }
+
+  @Override
+  public Integer getPK() {
+    return getId();
   }
 }

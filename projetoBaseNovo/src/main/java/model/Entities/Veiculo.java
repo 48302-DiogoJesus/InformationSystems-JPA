@@ -1,6 +1,7 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -9,7 +10,7 @@ import java.lang.String;
 @Table(
     name = "veiculo"
 )
-public class Veiculo implements Serializable {
+public class Veiculo implements Serializable, JPAEntity<String> {
   @Id
   @Column(
       nullable = false
@@ -94,5 +95,10 @@ public class Veiculo implements Serializable {
 
   public void setId_gps(Gps id_gps) {
     this.id_gps = id_gps;
+  }
+
+  @Override
+  public String getPK() {
+    return getMatricula();
   }
 }

@@ -1,6 +1,7 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
 @Table(
     name = "registo"
 )
-public class Registo implements Serializable {
+public class Registo implements Serializable, JPAEntity<Integer> {
   @Id
   @GeneratedValue(
       strategy = GenerationType.SEQUENCE
@@ -71,5 +72,10 @@ public class Registo implements Serializable {
 
   public void setId_gps(Gps id_gps) {
     this.id_gps = id_gps;
+  }
+
+  @Override
+  public Integer getPK() {
+    return getId();
   }
 }

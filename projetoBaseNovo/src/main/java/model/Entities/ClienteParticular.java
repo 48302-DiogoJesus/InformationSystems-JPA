@@ -1,6 +1,7 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -9,7 +10,7 @@ import java.lang.String;
 @Table(
     name = "cliente_particular"
 )
-public class ClienteParticular implements Serializable {
+public class ClienteParticular implements Serializable, JPAEntity<Cliente> {
   @Id
   @JoinColumn(name = "id_cliente", nullable = false)
   @OneToOne
@@ -37,5 +38,10 @@ public class ClienteParticular implements Serializable {
 
   public void setId_cliente(Cliente id_cliente) {
     this.id_cliente = id_cliente;
+  }
+
+  @Override
+  public Cliente getPK() {
+    return getId_cliente();
   }
 }

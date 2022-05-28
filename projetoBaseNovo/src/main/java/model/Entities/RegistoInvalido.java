@@ -1,20 +1,21 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 
 @Entity
 @Table(
-    name = "registo_proc"
+    name = "registo_invalido"
 )
-public class RegistoProc implements Serializable {
+public class RegistoInvalido implements Serializable, JPAEntity<Registo> {
   @Id
   @JoinColumn(name = "id_registo", nullable = false)
   @OneToOne
   private Registo id_registo;
 
-  public RegistoProc() {
+  public RegistoInvalido() {
   }
 
   public Registo getId_registo() {
@@ -23,5 +24,10 @@ public class RegistoProc implements Serializable {
 
   public void setId_registo(Registo id_registo) {
     this.id_registo = id_registo;
+  }
+
+  @Override
+  public Registo getPK() {
+    return getId_registo();
   }
 }

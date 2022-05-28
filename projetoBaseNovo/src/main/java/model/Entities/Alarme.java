@@ -1,15 +1,15 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
-import java.lang.String;
 
 @Entity
 @Table(
     name = "alarme"
 )
-public class Alarme implements Serializable {
+public class Alarme implements Serializable, JPAEntity<Integer> {
   @Id
   @GeneratedValue(
       strategy = GenerationType.SEQUENCE
@@ -32,6 +32,11 @@ public class Alarme implements Serializable {
 
   public int getId() {
     return this.id;
+  }
+
+  @Override
+  public Integer getPK() {
+    return getId();
   }
 
   public void setId(int id) {

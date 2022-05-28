@@ -1,6 +1,7 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 
@@ -8,7 +9,7 @@ import java.io.Serializable;
 @Table(
     name = "registo_n_proc"
 )
-public class RegistoNProc implements Serializable {
+public class RegistoNProc implements Serializable, JPAEntity<Registo> {
   @Id
   @JoinColumn(name = "id_registo", nullable = false)
   @OneToOne
@@ -23,5 +24,10 @@ public class RegistoNProc implements Serializable {
 
   public void setId_registo(Registo id_registo) {
     this.id_registo = id_registo;
+  }
+
+  @Override
+  public Registo getPK() {
+    return getId_registo();
   }
 }

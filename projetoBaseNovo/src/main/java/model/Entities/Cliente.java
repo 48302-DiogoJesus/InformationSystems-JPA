@@ -1,6 +1,7 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.*;
+import model.JPAEntity;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -9,7 +10,7 @@ import java.lang.String;
 @Table(
     name = "cliente"
 )
-public class Cliente implements Serializable {
+public class Cliente implements Serializable, JPAEntity<String> {
   @Id
   @Column(
       nullable = false
@@ -89,5 +90,10 @@ public class Cliente implements Serializable {
 
   public void setApagado(boolean apagado) {
     this.apagado = apagado;
+  }
+
+  @Override
+  public String getPK() {
+    return getNif();
   }
 }

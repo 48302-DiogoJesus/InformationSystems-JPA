@@ -1,9 +1,11 @@
-package model;
+package model.Entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import model.JPAEntity;
+
 import java.io.Serializable;
 import java.lang.String;
 
@@ -11,7 +13,7 @@ import java.lang.String;
 @Table(
     name = "estados_gps"
 )
-public class EstadosGps implements Serializable {
+public class EstadosGps implements Serializable, JPAEntity<String> {
   @Id
   @Column(
       nullable = false
@@ -27,5 +29,10 @@ public class EstadosGps implements Serializable {
 
   public void setEstado(String estado) {
     this.estado = estado;
+  }
+
+  @Override
+  public String getPK() {
+    return getEstado();
   }
 }
