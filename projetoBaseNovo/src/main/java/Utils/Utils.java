@@ -4,13 +4,19 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 public class Utils {
     public enum ProcedureType {
         FUNCTION,
         STORED_PROCEDURE
     }
+    public enum ReturnType {
+        TABLE,
+        VOID
+    }
 
-    public static List<Object[]> CallProcedure(String sp_name, String[] arguments, ProcedureType type) {
+    public static List<Object[]> CallProcedure(String sp_name, String[] arguments, ProcedureType type, ReturnType returnType) {
         try (
                 EntityManagerFactory ef = Persistence.createEntityManagerFactory("SI");
                 EntityManager em = ef.createEntityManager()
@@ -39,7 +45,13 @@ public class Utils {
                 q.setParameter(i, arguments[i - 1]);
             }
 
-            List<Object[]> results = q.getResultList();
+
+            List<Object[]> results = emptyList();
+            if (returnType == ReturnType.TABLE) {
+                results = q.getResultList();
+            } else {
+                q.executeUpdate();
+            }
 
             em.getTransaction().commit();
             return results;

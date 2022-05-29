@@ -2,7 +2,6 @@ package Presentation;
 
 import BusinessLogic.BusinessLogic;
 import BusinessLogic.Handler;
-import BusinessLogic.Handlers.d.InsertClienteParticular;
 import Utils.UIUtils;
 
 import java.util.HashMap;
@@ -23,7 +22,11 @@ public class UI {
 
     static {
         Commands.put(1, new Command("Inserir Cliente Particular", BusinessLogic.insertClienteParticular));
-        Commands.put(2, new Command("Exit Program", Exit::run));
+        Commands.put(2, new Command("Remover Cliente Particular", BusinessLogic.removeClienteParticular));
+        Commands.put(3, new Command("Atualizar Cliente Particular", BusinessLogic.updateClienteParticular));
+        Commands.put(4, new Command("Remover Cliente Particular", BusinessLogic.removeClienteParticular));
+        Commands.put(5, new Command("Total de alarmes para um veículo", BusinessLogic.totalDeAlarmes));
+        Commands.put(6, new Command("Exit Program", Exit::run));
     }
 
     public static void launch() {
@@ -35,6 +38,7 @@ public class UI {
                 System.out.println("Invalid Option\n");
                 continue;
             }
+            // Put try/catch block
             command.handler.run();
         }
     }

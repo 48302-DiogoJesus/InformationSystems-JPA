@@ -3,6 +3,7 @@ package BusinessLogic.Handlers.d;
 import Utils.UIUtils;
 import model.InputValidators;
 import Utils.Utils.ProcedureType;
+import Utils.Utils.ReturnType;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,12 @@ public class UpdateClienteParticular {
         });
 
         String[] args = {nif.value, cc.value, nome.value, morada.value, id_referenciador.value};
-        CallProcedure("update_cliente_particular", args, ProcedureType.STORED_PROCEDURE);
+        CallProcedure(
+                "update_cliente_particular",
+                args,
+                ProcedureType.STORED_PROCEDURE,
+                ReturnType.VOID
+        );
     }
 }
 

@@ -2,10 +2,10 @@ package BusinessLogic.Handlers.d;
 
 import Utils.UIUtils;
 import Utils.UIUtils.Input.*;
-import Utils.Utils;
 import model.InputValidators;
 import static Utils.Utils.CallProcedure;
 import Utils.Utils.ProcedureType;
+import Utils.Utils.ReturnType;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,11 @@ public class InsertClienteParticular {
         });
 
         String[] args = {nif.value, cc.value, nome.value, morada.value, id_referenciador.value,telefone.value};
-        CallProcedure("insert_cliente_particular", args, ProcedureType.STORED_PROCEDURE);
+        CallProcedure(
+                "insert_cliente_particular",
+                args,
+                ProcedureType.STORED_PROCEDURE,
+                ReturnType.VOID
+        );
     }
 }

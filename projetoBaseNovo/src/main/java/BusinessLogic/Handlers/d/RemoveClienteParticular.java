@@ -3,7 +3,7 @@ package BusinessLogic.Handlers.d;
 import Utils.UIUtils;
 import Utils.Utils.ProcedureType;
 import model.InputValidators;
-
+import Utils.Utils.ReturnType;
 import java.util.ArrayList;
 
 import static Utils.Utils.CallProcedure;
@@ -18,6 +18,11 @@ public class RemoveClienteParticular {
         });
 
         String[] args = { nif.value };
-        CallProcedure("remove_cliente_particular", args, ProcedureType.STORED_PROCEDURE);
+        CallProcedure(
+                "remove_cliente_particular",
+                args,
+                ProcedureType.STORED_PROCEDURE,
+                ReturnType.VOID
+        );
     }
 }
