@@ -25,7 +25,8 @@ public class UI {
         Commands.put(2, new Command("Remover Cliente Particular", BusinessLogic.removeClienteParticular));
         Commands.put(3, new Command("Atualizar Cliente Particular", BusinessLogic.updateClienteParticular));
         Commands.put(4, new Command("Total de alarmes para um veículo", BusinessLogic.totalDeAlarmes));
-        Commands.put(5, new Command("Exit Program", Exit::run));
+        Commands.put(5, new Command("Processamento de registos não processados", BusinessLogic.handleRegistos));
+        Commands.put(6, new Command("Exit Program", Exit::run));
     }
 
     public static void launch() {
