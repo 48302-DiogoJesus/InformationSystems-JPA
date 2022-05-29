@@ -1,12 +1,13 @@
 package BusinessLogic.Handlers.d;
 
 import Utils.UIUtils;
-import Utils.UIUtils.Input.Parameter;
+import Utils.UIUtils.Input.*;
+import Utils.Utils;
 import model.InputValidators;
+import static Utils.Utils.CallProcedure;
+import Utils.Utils.ProcedureType;
 
 import java.util.ArrayList;
-
-import static Utils.Utils.CallStoredProcedure;
 
 public class InsertClienteParticular {
 
@@ -23,8 +24,7 @@ public class InsertClienteParticular {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); add(telefone);}
         });
 
-        Object[] args = {nif, cc, nome, morada, id_referenciador,telefone};
-        CallStoredProcedure("insert_cliente_particular", args);
-
+        String[] args = {nif.value, cc.value, nome.value, morada.value, id_referenciador.value,telefone.value};
+        CallProcedure("insert_cliente_particular", args, ProcedureType.STORED_PROCEDURE);
     }
 }

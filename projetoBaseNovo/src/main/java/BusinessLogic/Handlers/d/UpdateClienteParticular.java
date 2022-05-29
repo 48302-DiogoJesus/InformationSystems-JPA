@@ -2,11 +2,11 @@ package BusinessLogic.Handlers.d;
 
 import Utils.UIUtils;
 import model.InputValidators;
+import Utils.Utils.ProcedureType;
 
 import java.util.ArrayList;
 
-import static Utils.Utils.CallStoredProcedure;
-import static com.sun.tools.xjc.reader.Ring.add;
+import static Utils.Utils.CallProcedure;
 
 
 public class UpdateClienteParticular {
@@ -23,9 +23,8 @@ public class UpdateClienteParticular {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); }
         });
 
-        Object[] args = {nif, cc, nome, morada, id_referenciador};
-        CallStoredProcedure("insert_cliente_particular", args);
-
+        String[] args = {nif.value, cc.value, nome.value, morada.value, id_referenciador.value};
+        CallProcedure("update_cliente_particular", args, ProcedureType.STORED_PROCEDURE);
     }
 }
 

@@ -42,7 +42,7 @@ public class UIUtils {
                     if (inputState.valid) {
                         break;
                     }
-                    System.out.println("Error:" + inputState.errorMessage);
+                    System.out.println("Error > " + inputState.errorMessage);
                     System.out.println();
                 }
             }

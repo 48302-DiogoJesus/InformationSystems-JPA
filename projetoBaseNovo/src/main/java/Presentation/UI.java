@@ -1,5 +1,6 @@
 package Presentation;
 
+import BusinessLogic.BusinessLogic;
 import BusinessLogic.Handler;
 import BusinessLogic.Handlers.d.InsertClienteParticular;
 import Utils.UIUtils;
@@ -21,7 +22,7 @@ public class UI {
     static HashMap<Integer, Command> Commands = new HashMap<>();
 
     static {
-        Commands.put(1, new Command("Inserir Cliente Particular", InsertClienteParticular::run));
+        Commands.put(1, new Command("Inserir Cliente Particular", BusinessLogic.insertClienteParticular));
         Commands.put(2, new Command("Exit Program", Exit::run));
     }
 

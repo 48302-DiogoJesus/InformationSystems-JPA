@@ -1,13 +1,14 @@
 package BusinessLogic.Handlers.d;
 
 import Utils.UIUtils;
+import Utils.Utils.ProcedureType;
 import model.InputValidators;
 
 import java.util.ArrayList;
 
-import static Utils.Utils.CallStoredProcedure;
+import static Utils.Utils.CallProcedure;
 
-public class DeleteClienteParticular {
+public class RemoveClienteParticular {
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
         UIUtils.Input.Parameter nif = new UIUtils.Input.Parameter("Nif", InputValidators::NIF);
@@ -16,10 +17,7 @@ public class DeleteClienteParticular {
             {add(nif);}
         });
 
-        System.out.println(nif.value);
-
-        Object[] args = {nif};
-        CallStoredProcedure("remove_cliente_particular", args);
-
+        String[] args = { nif.value };
+        CallProcedure("remove_cliente_particular", args, ProcedureType.STORED_PROCEDURE);
     }
 }
