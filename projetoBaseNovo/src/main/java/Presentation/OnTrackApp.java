@@ -1,12 +1,11 @@
 package Presentation;
 
-import BusinessLogic.BLService;
-
 public class OnTrackApp
 {
 	public static void main(String[] args)
     {
-        BLService bl = new BLService();
+        UI.launch();
+        /*
         bl.insertClienteParticular(
                 "999999990",
                 "191919191919",
@@ -15,5 +14,6 @@ public class OnTrackApp
                 "222222222",
                 "555555555"
         );
+        */
     }
 }

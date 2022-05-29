@@ -17,7 +17,7 @@ public class Utils {
             StringBuilder queryString = new StringBuilder("call " + sp_name );
             queryString.append("(");
             for (int i = 1; i <= arguments.length; i++) {
-                queryString.append("?" + i);
+                queryString.append("?").append(i);
                 if (i != arguments.length) {
                     queryString.append(", ");
                 }
@@ -36,5 +36,4 @@ public class Utils {
             em.getTransaction().commit();
         }
     }
-
 }

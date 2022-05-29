@@ -4,6 +4,7 @@ import Utils.Utils;
 
 public class BLService
 {
+    // Contains all the other Handlers maybe
     /*
     EXEMPLO DE UTILIZAÇÃO MAIS COMPLEXO
     public void insertClienteParticular(
