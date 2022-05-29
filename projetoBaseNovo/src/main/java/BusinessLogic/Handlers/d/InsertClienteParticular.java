@@ -2,6 +2,7 @@ package BusinessLogic.Handlers.d;
 
 import Utils.UIUtils;
 import Utils.UIUtils.Input.*;
+import Utils.Utils;
 import model.InputValidators;
 import static Utils.Utils.CallProcedure;
 import Utils.Utils.ProcedureType;
@@ -13,6 +14,7 @@ public class InsertClienteParticular {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
+        /*
         Parameter nif = new Parameter("Nif", InputValidators::NIF);
         Parameter cc = new Parameter("CC", InputValidators::CC);
         Parameter nome = new Parameter("Nome", InputValidators::NOME);
@@ -30,6 +32,9 @@ public class InsertClienteParticular {
                 args,
                 ProcedureType.STORED_PROCEDURE,
                 ReturnType.VOID
-        );
+        );*/
+
+        String[] args = {};
+        CallProcedure("handle_registos", args, Utils.ProcedureType.STORED_PROCEDURE,ReturnType.VOID);
     }
 }

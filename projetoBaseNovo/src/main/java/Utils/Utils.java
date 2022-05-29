@@ -45,14 +45,13 @@ public class Utils {
                 q.setParameter(i, arguments[i - 1]);
             }
 
-
+/**/
             List<Object[]> results = emptyList();
             if (returnType == ReturnType.TABLE) {
                 results = q.getResultList();
             } else {
                 q.executeUpdate();
             }
-
             em.getTransaction().commit();
             return results;
         }
