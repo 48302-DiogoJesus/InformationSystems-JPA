@@ -1,23 +1,23 @@
 package BusinessLogic.Handlers.d;
 
-import Utils.UIUtils;
+import Utils.UIUtils.Input;
 import Utils.Utils.ProcedureType;
-import model.InputValidators;
 import Utils.Utils.ReturnType;
 import java.util.ArrayList;
+import model.Parameters.*;
 
 import static Utils.Utils.CallProcedure;
 
 public class RemoveClienteParticular {
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        UIUtils.Input.Parameter nif = new UIUtils.Input.Parameter("Nif", InputValidators::NIF);
+        Parameter nif = Parameters.NIF();
 
-        UIUtils.Input.getMultipleInputs(new ArrayList<>() {
+        Input.getMultipleInputs(new ArrayList<>() {
             {add(nif);}
         });
 
-        String[] args = { nif.value };
+        Parameter[] args = { nif };
         CallProcedure(
                 "remove_cliente_particular",
                 args,

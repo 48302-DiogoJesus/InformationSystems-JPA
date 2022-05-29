@@ -3,6 +3,7 @@ package Utils;
 import jakarta.persistence.*;
 
 import java.util.List;
+import model.Parameters.Parameter;
 
 import static java.util.Collections.emptyList;
 
@@ -16,7 +17,7 @@ public class Utils {
         VOID
     }
 
-    public static List<Object[]> CallProcedure(String sp_name, String[] arguments, ProcedureType type, ReturnType returnType) {
+    public static List<Object[]> CallProcedure(String sp_name, Parameter[] params, ProcedureType type, ReturnType returnType) {
         try (
                 EntityManagerFactory ef = Persistence.createEntityManagerFactory("SI");
                 EntityManager em = ef.createEntityManager()
@@ -31,9 +32,9 @@ public class Utils {
             // Build query string
             StringBuilder queryString = new StringBuilder(startQuery);
             queryString.append("(");
-            for (int i = 1; i <= arguments.length; i++) {
+            for (int i = 1; i <= params.length; i++) {
                 queryString.append("?").append(i);
-                if (i != arguments.length) {
+                if (i != params.length) {
                     queryString.append(", ");
                 }
             }
@@ -41,10 +42,14 @@ public class Utils {
 
             Query q = em.createNativeQuery(queryString.toString());
             // Set parameters
-            for (int i = 1; i <= arguments.length; i++) {
-                q.setParameter(i, arguments[i - 1]);
+            for (int i = 1; i <= params.length; i++) {
+                Parameter param = params[i - 1];
+                // If optional and empty set NULL
+                if (param.valueClass == String.class && param.value == "" && param.optional) {
+                    q.setParameter(i, null);
+                }
+                q.setParameter(i, param.value);
             }
-
 
             List<Object[]> results = emptyList();
             if (returnType == ReturnType.TABLE) {

@@ -2,11 +2,13 @@ package BusinessLogic.Handlers.e;
 
 import Utils.Utils;
 import Utils.UIUtils.*;
-import Utils.UIUtils.Input.Parameter;
-import model.InputValidators;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import Utils.Utils.ReturnType;
+import model.Parameters.Parameter;
+import model.Parameters.Parameters;
 
 import static Utils.Utils.CallProcedure;
 
@@ -22,17 +24,16 @@ public class TotalDeAlarmes {
     }
 
     public static void run() {
-
         // Ask year
-        Parameter ano = new Parameter("Ano", InputValidators::INTEGER);
+        Parameter ano = Parameters.ANO();
         // Ask matricula
-        Parameter matricula = new Parameter("Matrícula", InputValidators::MATRICULA);
+        Parameter matricula = Parameters.MATRICULA();
 
         Input.getMultipleInputs(new ArrayList<>() {
             {add(ano); add(matricula);}
         });
 
-        String[] args = new String[] {ano.value, matricula.value};
+        Parameter[] args = { ano, matricula };
 
         List<Object[]> list = CallProcedure(
                 "count_alarmes_returns_table",
@@ -41,14 +42,11 @@ public class TotalDeAlarmes {
                 ReturnType.TABLE
         );
 
-        ArrayList<TotalDeAlarmesResult> resultsList = convertToTable(list);
+        printTable(convertToTable(list), (String) matricula.value, (Integer) ano.value);
 
-        System.out.println("| -- Total de alarmes para o veiculo '" + matricula + "' no ano '" + ano + "' -- |");
-        for (TotalDeAlarmesResult row : resultsList) {
-            System.out.print("Matrícula: " + row.matricula);
-            System.out.println("| Nr de Alarmes: " + row.n_of_alarmes);
-        }
-        System.out.println("| ---- |");
+        System.out.println("Press ENTER to continue...");
+        Scanner wait = new Scanner(System.in);
+        wait.nextLine();
     }
 
     private static ArrayList<TotalDeAlarmesResult> convertToTable(List<Object[]> list) {
@@ -57,5 +55,20 @@ public class TotalDeAlarmes {
             resultsList.add(new TotalDeAlarmesResult((String) item[0], (Long) item[1]));
         }
         return resultsList;
+    }
+
+    private static void printTable(ArrayList<TotalDeAlarmesResult> table, String matricula, Integer ano) {
+        System.out.println();
+        System.out.println("| -- Total de alarmes para o veiculo '" + matricula + "' no ano '" + ano + "' -- |");
+        System.out.println("| Matricula | Nr Alarmes |");
+        System.out.println("| -------------------------------------------------------------- |");
+        for (TotalDeAlarmesResult row : table) {
+            System.out.print("| ");
+            System.out.print(row.matricula);
+            System.out.print("  |  ");
+            System.out.print(row.n_of_alarmes);
+            System.out.println(" |");
+        }
+        System.out.println("| -------------------------------------------------------------- |");
     }
 }

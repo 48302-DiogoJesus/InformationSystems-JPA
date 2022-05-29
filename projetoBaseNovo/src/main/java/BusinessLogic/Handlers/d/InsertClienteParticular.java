@@ -1,11 +1,10 @@
 package BusinessLogic.Handlers.d;
 
-import Utils.UIUtils;
-import Utils.UIUtils.Input.*;
-import model.InputValidators;
+import Utils.UIUtils.*;
 import static Utils.Utils.CallProcedure;
 import Utils.Utils.ProcedureType;
 import Utils.Utils.ReturnType;
+import model.Parameters.*;
 
 import java.util.ArrayList;
 
@@ -13,18 +12,18 @@ public class InsertClienteParticular {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter nif = new Parameter("Nif", InputValidators::NIF);
-        Parameter cc = new Parameter("CC", InputValidators::CC);
-        Parameter nome = new Parameter("Nome", InputValidators::NOME);
-        Parameter morada = new Parameter("Morada", InputValidators::MORADA);
-        Parameter id_referenciador = new Parameter("Id Referenciador",InputValidators::NIF);
-        Parameter telefone = new Parameter("Telefone", InputValidators::TELEFONE);
+        Parameter nif = Parameters.NIF();
+        Parameter cc = Parameters.CC();
+        Parameter nome = Parameters.NOME();
+        Parameter morada = Parameters.MORADA();
+        Parameter<String> telefone = Parameters.TELEFONE();
+        Parameter id_referenciador = Parameters.NIF();
 
-        UIUtils.Input.getMultipleInputs(new ArrayList<>() {
+        Input.getMultipleInputs(new ArrayList<>() {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); add(telefone);}
         });
 
-        String[] args = {nif.value, cc.value, nome.value, morada.value, id_referenciador.value,telefone.value};
+        Parameter[] args = { nif, cc, nome, morada, id_referenciador,telefone };
         CallProcedure(
                 "insert_cliente_particular",
                 args,
