@@ -12,7 +12,6 @@ public class DeleteClienteParticular {
     public static void run() {
         UIUtils.Input.Parameter nif = new UIUtils.Input.Parameter("Nif", InputValidators::NIF);
 
-
         UIUtils.Input.getMultipleInputs(new ArrayList<>() {
             {add(nif);}
         });
