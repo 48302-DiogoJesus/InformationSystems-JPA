@@ -1,5 +1,7 @@
 package model;
 
+import Utils.Utils.InputState;
+
 public class InputValidators {
     public static InputState NIF(String nif) {
         if (nif.length() != 9) {

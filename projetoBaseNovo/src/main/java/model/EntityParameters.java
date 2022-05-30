@@ -1,8 +1,8 @@
-package model.Parameters;
+package model;
 
-import model.InputValidators;
+import Utils.Utils.Parameter;
 
-public class Parameters {
+public class EntityParameters {
     public static Parameter<Integer> ANO() {
         return new Parameter<>("Ano", InputValidators::INTEGER, Integer.class);
     }

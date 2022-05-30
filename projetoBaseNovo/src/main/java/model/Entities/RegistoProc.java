@@ -1,7 +1,7 @@
 package model.Entities;
 
 import jakarta.persistence.*;
-import model.JPAEntity;
+import DataScopes.JPAEntity;
 
 import java.io.Serializable;
 

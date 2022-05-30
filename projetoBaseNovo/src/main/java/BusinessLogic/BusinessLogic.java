@@ -1,5 +1,6 @@
 package BusinessLogic;
 
+import BusinessLogic.Handlers.Handler;
 import BusinessLogic.Handlers.d.RemoveClienteParticular;
 import BusinessLogic.Handlers.d.InsertClienteParticular;
 import BusinessLogic.Handlers.d.UpdateClienteParticular;

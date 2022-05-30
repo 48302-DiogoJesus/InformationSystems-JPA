@@ -1,15 +1,10 @@
 package BusinessLogic.Handlers.f;
 
-import Utils.UIUtils;
-import Utils.Utils;
-import model.InputValidators;
-import model.Parameters.Parameter;
-
-import java.util.ArrayList;
+import Utils.Utils.*;
+import Utils.*;
 import java.util.Scanner;
 
 import static Utils.Utils.CallProcedure;
-import static java.util.Collections.emptyList;
 
 public class HandleRegistos {
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER

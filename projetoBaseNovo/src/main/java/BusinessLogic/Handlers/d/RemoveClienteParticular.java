@@ -1,19 +1,21 @@
 package BusinessLogic.Handlers.d;
 
-import Utils.UIUtils.Input;
+import Utils.UI_Utils;
 import Utils.Utils.ProcedureType;
 import Utils.Utils.ReturnType;
 import java.util.ArrayList;
-import model.Parameters.*;
+import Utils.Utils.Parameter;
+
+import model.EntityParameters;
 
 import static Utils.Utils.CallProcedure;
 
 public class RemoveClienteParticular {
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter nif = Parameters.NIF();
+        Parameter nif = EntityParameters.NIF();
 
-        Input.getMultipleInputs(new ArrayList<>() {
+        UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif);}
         });
 

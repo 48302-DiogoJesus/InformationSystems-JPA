@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import model.JPAEntity;
+import DataScopes.JPAEntity;
 
 import java.io.Serializable;
 

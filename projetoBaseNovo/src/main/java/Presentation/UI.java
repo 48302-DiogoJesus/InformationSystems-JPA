@@ -1,8 +1,8 @@
 package Presentation;
 
 import BusinessLogic.BusinessLogic;
-import BusinessLogic.Handler;
-import Utils.UIUtils;
+import BusinessLogic.Handlers.Handler;
+import Utils.UI_Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class UI {
     public static void launch() {
         while (true) {
             printOptions();
-            Integer option = UIUtils.Input.getInteger();
+            Integer option = UI_Utils.getInteger();
             Command command = Commands.get(option);
             System.out.println();
             if (command == null) {

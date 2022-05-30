@@ -1,10 +1,11 @@
 package BusinessLogic.Handlers.d;
 
-import Utils.UIUtils.*;
+import Utils.UI_Utils;
 import static Utils.Utils.CallProcedure;
 import Utils.Utils.ProcedureType;
 import Utils.Utils.ReturnType;
-import model.Parameters.*;
+import model.EntityParameters;
+import Utils.Utils.Parameter;
 
 import java.util.ArrayList;
 
@@ -12,14 +13,14 @@ public class InsertClienteParticular {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter nif = Parameters.NIF();
-        Parameter cc = Parameters.CC();
-        Parameter nome = Parameters.NOME();
-        Parameter morada = Parameters.MORADA();
-        Parameter<String> telefone = Parameters.TELEFONE();
-        Parameter id_referenciador = Parameters.NIF();
+        Parameter nif = EntityParameters.NIF();
+        Parameter cc = EntityParameters.CC();
+        Parameter nome = EntityParameters.NOME();
+        Parameter morada = EntityParameters.MORADA();
+        Parameter<String> telefone = EntityParameters.TELEFONE();
+        Parameter id_referenciador = EntityParameters.NIF();
 
-        Input.getMultipleInputs(new ArrayList<>() {
+        UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); add(telefone);}
         });
 

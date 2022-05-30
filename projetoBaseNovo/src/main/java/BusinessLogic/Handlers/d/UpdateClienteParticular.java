@@ -1,9 +1,10 @@
 package BusinessLogic.Handlers.d;
 
-import Utils.UIUtils.*;
+import Utils.UI_Utils;
 import Utils.Utils.ProcedureType;
 import Utils.Utils.ReturnType;
-import model.Parameters.*;
+import model.EntityParameters;
+import Utils.Utils.Parameter;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,13 @@ public class UpdateClienteParticular {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter nif = Parameters.NIF();
-        Parameter cc = Parameters.CC();
-        Parameter nome = Parameters.NOME();
-        Parameter morada = Parameters.MORADA();
-        Parameter id_referenciador = Parameters.NIF();
+        Parameter nif = EntityParameters.NIF();
+        Parameter cc = EntityParameters.CC();
+        Parameter nome = EntityParameters.NOME();
+        Parameter morada = EntityParameters.MORADA();
+        Parameter id_referenciador = EntityParameters.NIF();
 
-        Input.getMultipleInputs(new ArrayList<>() {
+        UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); }
         });
 

@@ -4,15 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.Persistence;
-import model.JPAEntity;
 
 import java.util.List;
 
 
 @SuppressWarnings("rawtypes")
-public class AbstractDataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
+public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
 
-    boolean isMine = true;
+    boolean isMine;
     boolean voted = false;
 
     ThreadLocal<Session> threadLocal = SessionThreadLocal.threadLocal;
@@ -21,7 +20,7 @@ public class AbstractDataScope<T extends JPAEntity<K>, K> implements AutoCloseab
     Class<T> javaClass;
     String entityName;
 
-    public AbstractDataScope(Class<T> javaClass) {
+    public DataScope(Class<T> javaClass) {
         this.javaClass = javaClass;
         this.entityName = javaClass.getName();
 
@@ -34,6 +33,7 @@ public class AbstractDataScope<T extends JPAEntity<K>, K> implements AutoCloseab
             s.setEm(em);
             threadLocal.set(s);
             em.getTransaction().begin();
+            // We are the main transaction
             isMine = true;
         }
         else {

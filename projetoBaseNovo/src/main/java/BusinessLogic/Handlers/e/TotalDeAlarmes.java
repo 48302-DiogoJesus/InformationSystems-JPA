@@ -1,14 +1,14 @@
 package BusinessLogic.Handlers.e;
 
 import Utils.Utils;
-import Utils.UIUtils.*;
+import Utils.UI_Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import Utils.Utils.ReturnType;
-import model.Parameters.Parameter;
-import model.Parameters.Parameters;
+import Utils.Utils.Parameter;
+import model.EntityParameters;
 
 import static Utils.Utils.CallProcedure;
 
@@ -25,11 +25,11 @@ public class TotalDeAlarmes {
 
     public static void run() {
         // Ask year
-        Parameter ano = Parameters.ANO();
+        Parameter ano = EntityParameters.ANO();
         // Ask matricula
-        Parameter matricula = Parameters.MATRICULA();
+        Parameter matricula = EntityParameters.MATRICULA();
 
-        Input.getMultipleInputs(new ArrayList<>() {
+        UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(ano); add(matricula);}
         });
 
