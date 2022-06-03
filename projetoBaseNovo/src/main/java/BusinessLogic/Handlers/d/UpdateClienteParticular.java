@@ -21,9 +21,12 @@ public class UpdateClienteParticular {
         Parameter morada = EntityParameters.MORADA(false);
         Parameter id_referenciador = EntityParameters.NIF(false, true);
 
-        UI_Utils.getMultipleInputs(new ArrayList<>() {
+        Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); }
         });
+
+        if (!result)
+            return;
 
         Parameter[] args = { nif, cc, nome, morada, id_referenciador };
         CallProcedure(

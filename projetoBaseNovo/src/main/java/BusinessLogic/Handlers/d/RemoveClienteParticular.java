@@ -15,9 +15,12 @@ public class RemoveClienteParticular {
     public static void run() {
         Parameter nif = EntityParameters.NIF(false, true);
 
-        UI_Utils.getMultipleInputs(new ArrayList<>() {
+        Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif);}
         });
+
+        if (!result)
+            return;
 
         Parameter[] args = { nif };
         CallProcedure(

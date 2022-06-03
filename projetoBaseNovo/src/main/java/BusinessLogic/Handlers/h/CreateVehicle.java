@@ -20,10 +20,13 @@ public class CreateVehicle {
         Parameter telefoneCondutor = EntityParameters.TELEFONE(false);
         Parameter numAlarmes = EntityParameters.NUMALARMES(false);
 
-        UI_Utils.getMultipleInputs(new ArrayList<>() {
+        Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(matricula); add(idCliente); add(idGps); add(estadoGps);
                 add(nomeCondutor); add(telefoneCondutor); add(numAlarmes);}
         });
+
+        if (!result)
+            return;
 
         Parameter[] args = { matricula, idCliente, idGps, estadoGps,
                 nomeCondutor,telefoneCondutor, numAlarmes };

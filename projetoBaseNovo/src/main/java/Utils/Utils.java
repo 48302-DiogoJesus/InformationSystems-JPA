@@ -9,7 +9,8 @@ import static java.util.Collections.emptyList;
 public class Utils {
     public enum ProcedureType {
         FUNCTION,
-        STORED_PROCEDURE
+        STORED_PROCEDURE,
+        VIEW
     }
     public enum ReturnType {
         TABLE,
@@ -73,33 +74,45 @@ public class Utils {
         }
 
         public void printValidOptions() {
+            int i = 1;
             for (Map.Entry<String, String> option : options.entrySet()) {
-                System.out.print(option.getKey() + ": ");
+                System.out.print(i + ") ");
                 System.out.println(option.getValue());
+                i++;
             }
         }
 
         // Value Setter
         public InputState setValue(String value) {
+            String finalVal = value;
             // If optional AND no value was passed
-            if (Objects.equals(value, "") && optional)
+            if (Objects.equals(finalVal, "") && optional)
                 return new InputState(true, null);
 
-            if (!options.isEmpty() && !options.containsKey(value)) {
-                return new InputState(false, "Invalid value for '" + name + "'");
+            if (!options.isEmpty()) {
+                try {
+                    int optionIndex = Integer.parseInt(finalVal);
+                    if (optionIndex <= 0 || optionIndex > options.keySet().size()) {
+                        return new InputState(false, "Invalid option");
+                    }
+                    finalVal = options.keySet().stream().toList().get(optionIndex);
+                } catch (NumberFormatException e) {
+                    return new InputState(false, "Invalid option");
+                }
             }
+            System.out.println("YOU CHOSE: " + finalVal);
 
             // Validate String input
-            InputState state = validator.validate(value);
+            InputState state = validator.validate(finalVal);
             if (!state.valid)
                 return state;
 
             // Set value with the correct conversion
             if (valueClass == Integer.class) {
-                this.value = Integer.parseInt(value);
+                this.value = Integer.parseInt(finalVal);
             }
             else {
-                this.value = value;
+                this.value = finalVal;
             }
             return state;
         }
@@ -113,20 +126,22 @@ public class Utils {
             em.getTransaction().begin();
 
             String startQuery = switch (type) {
-                case FUNCTION -> "select * from " + sp_name;
+                case FUNCTION, VIEW -> "select * from " + sp_name;
                 case STORED_PROCEDURE -> "call " + sp_name;
             };
 
-            // Build query string
             StringBuilder queryString = new StringBuilder(startQuery);
-            queryString.append("(");
-            for (int i = 1; i <= params.length; i++) {
-                queryString.append("?").append(i);
-                if (i != params.length) {
-                    queryString.append(", ");
+            if (type != ProcedureType.VIEW) {
+                // Build query string
+                queryString.append("(");
+                for (int i = 1; i <= params.length; i++) {
+                    queryString.append("?").append(i);
+                    if (i != params.length) {
+                        queryString.append(", ");
+                    }
                 }
+                queryString.append(")");
             }
-            queryString.append(")");
 
             Query q = em.createNativeQuery(queryString.toString());
             // Set parameters

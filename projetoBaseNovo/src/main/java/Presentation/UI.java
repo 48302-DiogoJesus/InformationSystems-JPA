@@ -59,7 +59,7 @@ public class UI {
         System.out.println("\n| -- Main Menu Options -- |");
         for (Map.Entry<Integer, Command> entry : Commands.entrySet()) {
             System.out.print(entry.getKey());
-            System.out.print(": ");
+            System.out.print(") ");
             System.out.println(entry.getValue().details);
         }
         System.out.println("\n> Choose an Option from 1 to " + (Commands.size()));

@@ -19,6 +19,7 @@ public class UI_Utils {
 
                 if (!param.options.isEmpty()) {
                     System.out.println();
+                    System.out.println();
                     System.out.println("| OPTIONS |");
                     param.printValidOptions();
                 }
@@ -27,9 +28,8 @@ public class UI_Utils {
 
                 String input = getString();
 
-                if (input.equals("exit")) {
+                if (input.equals("exit"))
                     return false;
-                }
 
                 InputState inputState = param.setValue(input);
 
@@ -50,7 +50,11 @@ public class UI_Utils {
     }
 
     public static Integer getInteger() {
-        Scanner in = new Scanner(System.in);
-        return in.nextInt();
+        String input = getString();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

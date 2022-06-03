@@ -24,6 +24,7 @@ public class ListEstadosGPS {
             System.out.println("Application Exception: " + e.getMessage());
         }
 
+        System.out.println();
         System.out.println("Press ENTER to continue...");
         Scanner wait = new Scanner(System.in);
         wait.nextLine();

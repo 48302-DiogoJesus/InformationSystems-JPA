@@ -29,9 +29,12 @@ public class TotalDeAlarmes {
         // Ask matricula
         Parameter matricula = EntityParameters.MATRICULA(true, true);
 
-        UI_Utils.getMultipleInputs(new ArrayList<>() {
+        Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(ano); add(matricula);}
         });
+
+        if (!result)
+            return;
 
         Parameter[] args = { ano, matricula };
 

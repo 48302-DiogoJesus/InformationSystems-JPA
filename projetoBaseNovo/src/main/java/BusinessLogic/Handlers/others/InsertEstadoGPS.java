@@ -13,9 +13,12 @@ public class InsertEstadoGPS {
 
         Parameter<String> estado = EntityParameters.ESTADOGPS(false, false);
 
-        UI_Utils.getMultipleInputs(new ArrayList<>() {
+        Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(estado);}
         });
+
+        if (!result)
+            return;
 
         try (
                 DataScope<EstadosGps, String> ds_estado_gps = new DataScope(EstadosGps.class);

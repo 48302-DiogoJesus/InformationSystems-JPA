@@ -16,7 +16,7 @@ public class ParameterValidOptions {
         HashMap<String, String> options = new HashMap<>();
         try (DataScope<Cliente, String> ds = new DataScope<>(Cliente.class)) {
             for (Cliente c: ds.getAll(RESULTS_LIMIT)) {
-                options.put(c.getPK(), "Nome: " + c.getNome() + " | Telefone: " + c.getTelefone());
+                options.put(c.getPK(), "Nif: " + c.getPK() + " | Nome: " + c.getNome() + " | Telefone: " + c.getTelefone());
             }
             ds.validateWork();
             return options;
