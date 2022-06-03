@@ -17,7 +17,7 @@ public class InsertClienteParticular {
         Parameter cc = EntityParameters.CC();
         Parameter nome = EntityParameters.NOME();
         Parameter morada = EntityParameters.MORADA();
-        Parameter<String> telefone = EntityParameters.TELEFONE();
+        Parameter telefone = EntityParameters.TELEFONE();
         Parameter id_referenciador = EntityParameters.NIF();
 
         UI_Utils.getMultipleInputs(new ArrayList<>() {
