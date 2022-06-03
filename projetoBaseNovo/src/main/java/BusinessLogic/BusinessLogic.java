@@ -6,6 +6,8 @@ import BusinessLogic.Handlers.d.InsertClienteParticular;
 import BusinessLogic.Handlers.d.UpdateClienteParticular;
 import BusinessLogic.Handlers.e.TotalDeAlarmes;
 import BusinessLogic.Handlers.f.HandleRegistos;
+import BusinessLogic.Handlers.others.RemoveEstadoGPS;
+import BusinessLogic.Handlers.others.InsertEstadoGPS;
 
 public class BusinessLogic
 {
@@ -19,4 +21,8 @@ public class BusinessLogic
 
     // f
     static public Handler handleRegistos = HandleRegistos::run;
+
+    // others
+    static public Handler insertEstadoGPS = InsertEstadoGPS::run;
+    static public Handler removeEstadoGPS = RemoveEstadoGPS::run;
 }
