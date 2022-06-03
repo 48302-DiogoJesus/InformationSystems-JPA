@@ -7,6 +7,9 @@ import BusinessLogic.Handlers.d.UpdateClienteParticular;
 import BusinessLogic.Handlers.e.TotalDeAlarmes;
 import BusinessLogic.Handlers.f.HandleRegistos;
 import BusinessLogic.Handlers.h.CreateVehicle;
+import BusinessLogic.Handlers.others.InsertEstadoGPS;
+import BusinessLogic.Handlers.others.ListEstadosGPS;
+import BusinessLogic.Handlers.others.RemoveEstadoGPS;
 
 public class BusinessLogic
 {
@@ -20,6 +23,12 @@ public class BusinessLogic
 
     // f)
     static public Handler handleRegistos = HandleRegistos::run;
-    //h
+
+    // h)
     static public Handler createVehicle = CreateVehicle::run;
+
+    // Estados GPS
+    static public Handler insertEstadoGPS = InsertEstadoGPS::run;
+    static public Handler listEstadoGPS = ListEstadosGPS::run;
+    static public Handler removeEstadoGPS = RemoveEstadoGPS::run;
 }

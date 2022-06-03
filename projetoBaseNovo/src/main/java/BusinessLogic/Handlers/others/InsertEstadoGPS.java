@@ -11,7 +11,7 @@ public class InsertEstadoGPS {
 
     public static void run() {
 
-        Parameter<String> estado = EntityParameters.ESTADOGPS();
+        Parameter<String> estado = EntityParameters.ESTADOGPS(false, false);
 
         UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(estado);}

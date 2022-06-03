@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.*;
 
 import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
 
 public class Utils {
     public enum ProcedureType {
@@ -74,17 +73,10 @@ public class Utils {
         }
 
         public void printValidOptions() {
-            int c = 1;
             for (Map.Entry<String, String> option : options.entrySet()) {
-                System.out.print(c);
-                System.out.print(": ");
+                System.out.print(option.getKey() + ": ");
                 System.out.println(option.getValue());
-                c++;
             }
-        }
-
-        public boolean validateValue(String val) {
-            return options.containsKey(val);
         }
 
         // Value Setter
@@ -93,7 +85,7 @@ public class Utils {
             if (Objects.equals(value, "") && optional)
                 return new InputState(true, null);
 
-            if (!options.isEmpty() && !validateValue(value)) {
+            if (!options.isEmpty() && !options.containsKey(value)) {
                 return new InputState(false, "Invalid value for '" + name + "'");
             }
 

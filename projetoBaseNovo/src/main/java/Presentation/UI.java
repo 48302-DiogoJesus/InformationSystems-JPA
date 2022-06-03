@@ -27,7 +27,10 @@ public class UI {
         Commands.put(4, new Command("Total de alarmes para um veículo", BusinessLogic.totalDeAlarmes));
         Commands.put(5, new Command("Processamento de registos não processados", BusinessLogic.handleRegistos));
         Commands.put(6, new Command("Inserir Veiculo", BusinessLogic.createVehicle));
-        Commands.put(7, new Command("Exit Program", Exit::run));
+        Commands.put(7, new Command("Inserir Estado GPS", BusinessLogic.insertEstadoGPS));
+        Commands.put(8, new Command("Remover Estado GPS", BusinessLogic.removeEstadoGPS));
+        Commands.put(9, new Command("Listar Estados GPS", BusinessLogic.listEstadoGPS));
+        Commands.put(10, new Command("Exit Program", Exit::run));
     }
 
     public static void launch() {

@@ -9,6 +9,7 @@ import model.Entities.Veiculo;
 import java.util.HashMap;
 
 public class ParameterValidOptions {
+
     private static final int RESULTS_LIMIT = 5;
 
     static HashMap<String, String> Clientes() {

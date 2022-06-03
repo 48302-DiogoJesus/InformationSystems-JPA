@@ -13,7 +13,7 @@ import static Utils.Utils.CallProcedure;
 public class RemoveClienteParticular {
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter nif = EntityParameters.NIF(false);
+        Parameter nif = EntityParameters.NIF(false, true);
 
         UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif);}

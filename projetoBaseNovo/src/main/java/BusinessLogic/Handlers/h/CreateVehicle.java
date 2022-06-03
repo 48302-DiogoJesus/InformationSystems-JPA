@@ -12,13 +12,13 @@ public class CreateVehicle {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter<String> matricula = EntityParameters.MATRICULA(false);
-        Parameter<String> idCliente = EntityParameters.NIF(false);
-        Parameter<Integer> idGps = EntityParameters.GPSID(false);
-        Parameter<String> estadoGps = EntityParameters.ESTADOGPS(false);
-        Parameter<String> nomeCondutor = EntityParameters.NOMECONDUTOR(false);
-        Parameter<String> telefoneCondutor = EntityParameters.TELEFONE(false);
-        Parameter<Integer> numAlarmes = EntityParameters.NUMALARMES(false);
+        Parameter matricula = EntityParameters.MATRICULA(false, false);
+        Parameter idCliente = EntityParameters.NIF(false, true);
+        Parameter idGps = EntityParameters.GPSID(false, true);
+        Parameter estadoGps = EntityParameters.ESTADOGPS(false, true);
+        Parameter nomeCondutor = EntityParameters.NOMECONDUTOR(false);
+        Parameter telefoneCondutor = EntityParameters.TELEFONE(false);
+        Parameter numAlarmes = EntityParameters.NUMALARMES(false);
 
         UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(matricula); add(idCliente); add(idGps); add(estadoGps);

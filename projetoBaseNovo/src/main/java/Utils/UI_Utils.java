@@ -7,7 +7,7 @@ import java.util.*;
 
 public class UI_Utils {
 
-    public static void getMultipleInputs(ArrayList<Parameter> requiredParameters) {
+    public static Boolean getMultipleInputs(ArrayList<Parameter> requiredParameters) {
         for (Parameter param : requiredParameters) {
             while (true) {
                 String parameterName = param.name;
@@ -15,14 +15,21 @@ public class UI_Utils {
 
                 System.out.print(parameterName);
                 if (optional)
-                    System.out.print(" (optional) ");
+                    System.out.print(" (optional)");
 
-                System.out.println("- Valid Options -");
-                param.printValidOptions();
+                if (!param.options.isEmpty()) {
+                    System.out.println();
+                    System.out.println("| OPTIONS |");
+                    param.printValidOptions();
+                }
 
-                System.out.println(": ");
+                System.out.println(":");
 
                 String input = getString();
+
+                if (input.equals("exit")) {
+                    return false;
+                }
 
                 InputState inputState = param.setValue(input);
 
@@ -30,10 +37,11 @@ public class UI_Utils {
                     break;
                 }
                 System.out.println();
-                System.out.println("Erro: " + inputState.errorMessage + " Tente de novo.");
+                System.out.println("[INVALID VALUE]: " + inputState.errorMessage);
                 System.out.println();
             }
         }
+        return true;
     }
 
     public static String getString() {
