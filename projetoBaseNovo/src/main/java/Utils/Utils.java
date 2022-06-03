@@ -2,10 +2,10 @@ package Utils;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 
 public class Utils {
     public enum ProcedureType {
@@ -41,12 +41,31 @@ public class Utils {
         public Class<T> valueClass;
         // Function that takes a string and validates it. Each parameter could have its own validator
         public InputValidator validator;
-        // 2 Constructors
+
+        // Map Keys   = possible values
+        // Map Values = Extra information
+        // Example: Key=23-AS-12 | Value=Rodrigo, 2003, Chevrolet
+        public HashMap<String, String> options = new HashMap<>();
+
+        // 4 Constructors
+        public Parameter(String name, Boolean optional, InputValidator inputValidator, Class<T> valueClass, HashMap<String, String> validOptions) {
+            this.name = name;
+            this.optional = optional;
+            this.validator = inputValidator;
+            this.valueClass = valueClass;
+            this.options = validOptions;
+        }
         public Parameter(String name, Boolean optional, InputValidator inputValidator, Class<T> valueClass) {
             this.name = name;
             this.optional = optional;
             this.validator = inputValidator;
             this.valueClass = valueClass;
+        }
+        public Parameter(String name, InputValidator inputValidator, Class<T> valueClass, HashMap<String, String> validOptions) {
+            this.name = name;
+            this.validator = inputValidator;
+            this.valueClass = valueClass;
+            this.options = validOptions;
         }
         public Parameter(String name, InputValidator inputValidator, Class<T> valueClass) {
             this.name = name;
@@ -54,10 +73,18 @@ public class Utils {
             this.valueClass = valueClass;
         }
 
-        public List<String> options = emptyList();
+        public void printValidOptions() {
+            int c = 1;
+            for (Map.Entry<String, String> option : options.entrySet()) {
+                System.out.print(c);
+                System.out.print(": ");
+                System.out.println(option.getValue());
+                c++;
+            }
+        }
 
-        public boolean validateOptions(String val) {
-            return options.contains(val);
+        public boolean validateValue(String val) {
+            return options.containsKey(val);
         }
 
         // Value Setter
@@ -66,7 +93,7 @@ public class Utils {
             if (Objects.equals(value, "") && optional)
                 return new InputState(true, null);
 
-            if (!validateOptions(value)) {
+            if (!options.isEmpty() && !validateValue(value)) {
                 return new InputState(false, "Invalid value for '" + name + "'");
             }
 

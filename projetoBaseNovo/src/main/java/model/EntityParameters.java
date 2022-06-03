@@ -7,13 +7,13 @@ public class EntityParameters {
         return new Parameter<>("Ano", InputValidators::INTEGER, Integer.class);
     }
     public static Parameter<String> MATRICULA() {
-        return new Parameter<>("Matrícula", true, InputValidators::MATRICULA, String.class);
+        return new Parameter<>("Matrícula", true, InputValidators::MATRICULA, String.class, ParameterValidOptions.Veiculos());
     }
     public static Parameter<String> NIF() {
-        return new Parameter<>("Nif", InputValidators::NIF, String.class);
+        return new Parameter<>("Nif", InputValidators::NIF, String.class, ParameterValidOptions.Clientes());
     }
     public static Parameter<String> CC() {
-        return new Parameter<>("CC", InputValidators::CC, String.class);
+        return new Parameter<>("CC", InputValidators::CC, String.class, null);
     }
     public static Parameter<String> NOME() {
         return new Parameter<>("Nome", InputValidators::NOME, String.class);

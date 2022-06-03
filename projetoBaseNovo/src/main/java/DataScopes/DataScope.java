@@ -91,6 +91,11 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
         return items;
     }
 
+    public List<T> getAll(int limit) {
+        List<T> items = em.createQuery("select a from " + entityName + " a", javaClass).setMaxResults(limit).getResultList();
+        return items;
+    }
+
     public T getSingle(K id) {
         T item = em.find(javaClass, id);
         // NULL if not found

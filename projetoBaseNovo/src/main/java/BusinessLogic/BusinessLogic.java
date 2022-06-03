@@ -14,9 +14,9 @@ public class BusinessLogic
     static public Handler insertClienteParticular = InsertClienteParticular::run;
     static public Handler updateClienteParticular = UpdateClienteParticular::run;
 
-    // e
+    // e)
     static public Handler totalDeAlarmes = TotalDeAlarmes::run;
 
-    // f
+    // f)
     static public Handler handleRegistos = HandleRegistos::run;
 }
