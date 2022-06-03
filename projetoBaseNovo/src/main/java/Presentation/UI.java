@@ -30,7 +30,8 @@ public class UI {
         Commands.put(7, new Command("Inserir Estado GPS", BusinessLogic.insertEstadoGPS));
         Commands.put(8, new Command("Remover Estado GPS", BusinessLogic.removeEstadoGPS));
         Commands.put(9, new Command("Listar Estados GPS", BusinessLogic.listEstadoGPS));
-        Commands.put(10, new Command("Exit Program", Exit::run));
+        Commands.put(10, new Command("Inserir sobre a vista de Alarmes", BusinessLogic.inserirSobreVistaAlarmes));
+        Commands.put(11, new Command("Exit Program", Exit::run));
     }
 
     public static void launch() {

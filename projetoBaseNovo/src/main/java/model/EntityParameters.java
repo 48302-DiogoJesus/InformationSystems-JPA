@@ -59,7 +59,7 @@ public class EntityParameters {
     }
 
     public static Parameter<String> MARCATEMPORAL(Boolean optional) {
-        return new Parameter<>("Marca Temporal", optional, InputValidators::LATITUDE, String.class);
+        return new Parameter<>("Marca Temporal", optional, InputValidators::MARCATEMPORAL, String.class);
     }
 
     public static Parameter<Integer> GPSID(Boolean optional, Boolean showOptions) {

@@ -7,6 +7,7 @@ import BusinessLogic.Handlers.d.UpdateClienteParticular;
 import BusinessLogic.Handlers.e.TotalDeAlarmes;
 import BusinessLogic.Handlers.f.HandleRegistos;
 import BusinessLogic.Handlers.h.CreateVehicle;
+import BusinessLogic.Handlers.j.InserirSobreVistaAlarmes;
 import BusinessLogic.Handlers.others.InsertEstadoGPS;
 import BusinessLogic.Handlers.others.ListEstadosGPS;
 import BusinessLogic.Handlers.others.RemoveEstadoGPS;
@@ -31,4 +32,7 @@ public class BusinessLogic
     static public Handler insertEstadoGPS = InsertEstadoGPS::run;
     static public Handler listEstadoGPS = ListEstadosGPS::run;
     static public Handler removeEstadoGPS = RemoveEstadoGPS::run;
+
+    // j)
+    static public Handler inserirSobreVistaAlarmes = InserirSobreVistaAlarmes::run;
 }
