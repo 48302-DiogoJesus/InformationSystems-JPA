@@ -15,11 +15,11 @@ public class UpdateClienteParticular {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() {
-        Parameter nif = EntityParameters.NIF();
-        Parameter cc = EntityParameters.CC();
-        Parameter nome = EntityParameters.NOME();
-        Parameter morada = EntityParameters.MORADA();
-        Parameter id_referenciador = EntityParameters.NIF();
+        Parameter nif = EntityParameters.NIF(false);
+        Parameter cc = EntityParameters.CC(false);
+        Parameter nome = EntityParameters.NOME(false);
+        Parameter morada = EntityParameters.MORADA(false);
+        Parameter id_referenciador = EntityParameters.NIF(false);
 
         UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); }

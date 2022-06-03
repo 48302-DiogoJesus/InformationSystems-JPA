@@ -6,6 +6,7 @@ import BusinessLogic.Handlers.d.InsertClienteParticular;
 import BusinessLogic.Handlers.d.UpdateClienteParticular;
 import BusinessLogic.Handlers.e.TotalDeAlarmes;
 import BusinessLogic.Handlers.f.HandleRegistos;
+import BusinessLogic.Handlers.h.CreateVehicle;
 
 public class BusinessLogic
 {
@@ -19,4 +20,6 @@ public class BusinessLogic
 
     // f
     static public Handler handleRegistos = HandleRegistos::run;
+    //h
+    static public Handler createVehicle = CreateVehicle::run;
 }
