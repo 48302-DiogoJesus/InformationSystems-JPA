@@ -25,9 +25,9 @@ public class TotalDeAlarmes {
 
     public static void run() {
         // Ask year
-        Parameter ano = EntityParameters.ANO();
+        Parameter ano = EntityParameters.ANO(false);
         // Ask matricula
-        Parameter matricula = EntityParameters.MATRICULA();
+        Parameter matricula = EntityParameters.MATRICULA(false);
 
         UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(ano); add(matricula);}
