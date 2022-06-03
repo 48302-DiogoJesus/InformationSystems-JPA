@@ -54,11 +54,21 @@ public class Utils {
             this.valueClass = valueClass;
         }
 
+        public List<String> options = emptyList();
+
+        public boolean validateOptions(String val) {
+            return options.contains(val);
+        }
+
         // Value Setter
         public InputState setValue(String value) {
             // If optional AND no value was passed
             if (Objects.equals(value, "") && optional)
                 return new InputState(true, null);
+
+            if (!validateOptions(value)) {
+                return new InputState(false, "Invalid value for '" + name + "'");
+            }
 
             // Validate String input
             InputState state = validator.validate(value);

@@ -7,6 +7,7 @@ import java.util.*;
 
 public class UI_Utils {
 
+
     public static void getMultipleInputs(ArrayList<Parameter> requiredParameters) {
         for (Parameter param : requiredParameters) {
             while (true) {
@@ -18,7 +19,9 @@ public class UI_Utils {
                     System.out.print(" (optional) ");
                 System.out.println(":");
 
-                InputState inputState = param.setValue(getString());
+                String input = getString();
+
+                InputState inputState = param.setValue(input);
 
                 if (inputState.valid) {
                     break;
