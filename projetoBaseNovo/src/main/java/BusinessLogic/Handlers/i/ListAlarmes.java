@@ -2,11 +2,9 @@ package BusinessLogic.Handlers.i;
 
 import Utils.Utils.*;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import model.Entities.ListAllAlarmes;
+
+import model.Entities.Views.ListAllAlarmes;
 
 import static Utils.UI_Utils.printTable;
 import static Utils.Utils.CallProcedure;

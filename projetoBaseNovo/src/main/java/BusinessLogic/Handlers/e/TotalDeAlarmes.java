@@ -4,12 +4,10 @@ import Utils.Utils;
 import Utils.UI_Utils;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import Utils.Utils.ReturnType;
 import Utils.Utils.Parameter;
 import model.Entities.Alarme;
-import model.Entities.ListAllAlarmes;
 import model.EntityParameters;
 
 import static Utils.UI_Utils.printTable;

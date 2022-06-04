@@ -13,7 +13,7 @@ import java.lang.String;
 public class ClienteInstitucional implements Serializable, JPAEntity<Cliente> {
   @Id
   @JoinColumn(name = "id_cliente", nullable = false)
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   private Cliente id_cliente;
 
   @Column(

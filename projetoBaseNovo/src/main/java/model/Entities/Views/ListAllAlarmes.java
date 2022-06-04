@@ -1,10 +1,11 @@
-package model.Entities;
+package model.Entities.Views;
 
 import DataScopes.JPAEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import model.Entities.Veiculo;
 
 import javax.lang.model.type.NullType;
 import java.io.Serializable;

@@ -4,15 +4,13 @@ import DataScopes.DataScope;
 import Utils.Utils.Parameter;
 import Utils.UI_Utils;
 
-import model.Entities.ListAllAlarmes;
+import model.Entities.Views.ListAllAlarmes;
 import model.Entities.Veiculo;
 import model.EntityParameters;
 
 import javax.lang.model.type.NullType;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class InserirSobreVistaAlarmes {
     public static void run() throws Exception {

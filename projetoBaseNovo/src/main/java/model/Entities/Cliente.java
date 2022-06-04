@@ -17,7 +17,7 @@ public class Cliente implements Serializable, JPAEntity<String> {
   )
   private String nif;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "referenciador", nullable = false)
   private Cliente referenciador;
 

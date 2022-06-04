@@ -22,7 +22,7 @@ public class Registo implements Serializable, JPAEntity<Integer> {
   private int id;
 
   @JoinColumn(name = "id_gps", nullable = false)
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Gps id_gps;
 
   private String longitude;

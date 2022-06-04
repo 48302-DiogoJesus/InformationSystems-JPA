@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class RegistoNProc implements Serializable, JPAEntity<Registo> {
   @Id
   @JoinColumn(name = "id_registo", nullable = false)
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   private Registo id_registo;
 
   public RegistoNProc() {

@@ -18,15 +18,15 @@ public class Veiculo implements Serializable, JPAEntity<String> {
   private String matricula;
 
   @JoinColumn(name = "id_cliente", nullable = false)
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Cliente id_cliente;
 
   @JoinColumn(name = "id_gps", nullable = false)
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   private Gps id_gps;
 
   @JoinColumn(name = "estado_gps", nullable = false)
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   private EstadosGps estado_gps;
 
   private String nome_condutor;

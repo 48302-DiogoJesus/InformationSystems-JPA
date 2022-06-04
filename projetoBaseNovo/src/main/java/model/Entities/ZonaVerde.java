@@ -21,7 +21,7 @@ public class ZonaVerde implements Serializable, JPAEntity<Integer> {
   private int id;
 
   @JoinColumn(name = "id_veiculo", nullable = false)
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Veiculo id_veiculo;
 
   @Column(

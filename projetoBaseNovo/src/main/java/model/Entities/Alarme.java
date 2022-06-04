@@ -20,11 +20,11 @@ public class Alarme implements Serializable, JPAEntity<Integer> {
   private int id;
 
   @JoinColumn(name = "id_registo", nullable = false)
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Registo id_registo;
 
   @JoinColumn(name = "id_veiculo",  nullable = false)
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Veiculo id_veiculo;
 
   public Alarme() {
