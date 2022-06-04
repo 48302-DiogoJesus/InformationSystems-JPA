@@ -2,10 +2,12 @@ package Presentation;
 
 import BusinessLogic.BusinessLogic;
 import BusinessLogic.Handlers.Handler;
-import Utils.UI_Utils;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static Utils.UI_Utils.getInteger;
+import static Utils.UI_Utils.waitEnter;
 
 public class UI {
 
@@ -32,25 +34,30 @@ public class UI {
         Commands.put(9, new Command("Listar Estados GPS", BusinessLogic.listEstadoGPS));
         Commands.put(10, new Command("Inserir sobre a vista de Alarmes", BusinessLogic.inserirSobreVistaAlarmes));
         Commands.put(11, new Command("Listar Alarmes", BusinessLogic.listAlarmes));
-        Commands.put(12, new Command("Exit Program", Exit::run));
+        Commands.put(12, new Command("Apagar Registos Inválidos", BusinessLogic.deleteRegistosInvalidos));
+        Commands.put(13, new Command("Exit Program", Exit::run));
     }
 
     public static void launch() {
         while (true) {
             printOptions();
-            Integer option = UI_Utils.getInteger();
+            Integer option = getInteger();
             Command command = Commands.get(option);
             System.out.println();
+
             if (command == null) {
-                System.out.println("Invalid Option\n");
+                System.out.println("[INVALID OPTION]\n");
                 continue;
             }
+
             try  {
+                System.out.println(" > Type 'exit' to go back to the menu\n");
                 command.handler.run();
+                waitEnter();
+
             } catch (Exception e) {
                 System.out.println();
-                System.out.println("Error: " + e.getMessage());
-                // Para debug
+                System.out.println("[UNCAUGHT ERROR]: " + e.getMessage());
                 e.printStackTrace();
                 System.out.println();
             }
@@ -58,13 +65,13 @@ public class UI {
     }
 
     private static void printOptions() {
-        System.out.println("\n| -- Main Menu Options -- |");
+        System.out.println("\n| -- MAIN MENU OPTIONS -- |");
         for (Map.Entry<Integer, Command> entry : Commands.entrySet()) {
             System.out.print(entry.getKey());
             System.out.print(") ");
             System.out.println(entry.getValue().details);
         }
-        System.out.println("\n> Choose an Option from 1 to " + (Commands.size()));
+        System.out.println("\n> Choose an Option from 1 to " + (Commands.size()) + ":");
     }
 
     private static class Exit {

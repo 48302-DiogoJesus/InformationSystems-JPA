@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.Persistence;
-
+import jakarta.persistence.PersistenceException;
 import java.util.List;
 
 
@@ -45,28 +45,37 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
     }
 
     @Override
-    public void close() {
+    public void close() throws Exception {
         // TODO Auto-generated method stub
         if (isMine) {
-            // Main transaction (first to be opened AND last to be called on CLOSE)
-            if (
-                threadLocal.get().getOk() // No Sub-Transaction has NOT voted (meaning everything should abort)
-                &&
-                voted                // Out transaction (MAIN) has voted (meaning it voted for commit)
-            )  {
-                threadLocal.get().getEm().getTransaction().commit();
+            try {
+                // Main transaction (first to be opened AND last to be called on CLOSE)
+                if (
+                        threadLocal.get().getOk() // No Sub-Transaction has NOT voted (meaning everything should abort)
+                        &&
+                        voted                     // Out transaction (MAIN) has voted (meaning it voted for commit)
+                )  {
+                    threadLocal.get().getEm().getTransaction().commit();
+                }
+                else {
+                    threadLocal.get().getEm().getTransaction().rollback();
+                }
+            } catch (PersistenceException e) {
+                String expected = "org.postgresql.util.PSQLException: ERROR: ";
+                String message = e.getMessage();
+                String PSQLMessage = message.substring(message.indexOf(expected) + expected.length()).split("\\r?\\n")[0];
+                throw new Exception("[DB ERROR] ON COMMIT/ROLLBACK: " + PSQLMessage);
             }
-            else {
-                threadLocal.get().getEm().getTransaction().rollback();
+            // If the commit/rollback fails we still want to close the threadLocal
+            finally {
+                // Release Resources
+                threadLocal.get().getEm().close();
+                threadLocal.get().getEf().close();
+                // Set ThreadLocal value to null
+                threadLocal.remove();
             }
-            // Release Resources
-            threadLocal.get().getEm().close();
-            threadLocal.get().getEf().close();
-            // Set ThreadLocal value to null
-            threadLocal.remove();
         }
         else {
-            System.out.println("Closing Sub-Transaction. Voted: " + voted);
             // Sub-transaction
             if (!voted) {
                 cancelWork();

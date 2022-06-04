@@ -8,6 +8,7 @@ import BusinessLogic.Handlers.e.TotalDeAlarmes;
 import BusinessLogic.Handlers.f.HandleRegistos;
 import BusinessLogic.Handlers.h.CreateVehicle;
 import BusinessLogic.Handlers.j.InserirSobreVistaAlarmes;
+import BusinessLogic.Handlers.k.DeleteRegistosInvalidos;
 import BusinessLogic.Handlers.others.InsertEstadoGPS;
 import BusinessLogic.Handlers.i.ListAlarmes;
 import BusinessLogic.Handlers.others.ListEstadosGPS;
@@ -39,4 +40,7 @@ public class BusinessLogic
 
     // j)
     static public Handler inserirSobreVistaAlarmes = InserirSobreVistaAlarmes::run;
+
+    // k)
+    static public Handler deleteRegistosInvalidos = DeleteRegistosInvalidos::run;
 }

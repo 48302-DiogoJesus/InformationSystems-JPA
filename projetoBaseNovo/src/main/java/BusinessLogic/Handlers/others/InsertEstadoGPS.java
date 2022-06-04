@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class InsertEstadoGPS {
 
-    public static void run() {
+    public static void run() throws Exception {
 
         Parameter<String> estado = EntityParameters.ESTADOGPS(false, false);
 
@@ -21,7 +21,7 @@ public class InsertEstadoGPS {
             return;
 
         try (
-                DataScope<EstadosGps, String> ds_estado_gps = new DataScope(EstadosGps.class);
+                DataScope<EstadosGps, String> ds_estado_gps = new DataScope<>(EstadosGps.class);
         ) {
 
             EstadosGps newEstadoGps = new EstadosGps();
@@ -33,8 +33,7 @@ public class InsertEstadoGPS {
             // Vote
             ds_estado_gps.validateWork();
 
-        } catch (Exception e) {
-            System.out.println("Application Exception: " + e.getMessage());
         }
+        System.out.println("[DONE] Novo Estado de GPS inserido");
     }
 }

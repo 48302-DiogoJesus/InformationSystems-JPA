@@ -95,12 +95,11 @@ public class Utils {
                     if (optionIndex <= 0 || optionIndex > options.keySet().size()) {
                         return new InputState(false, "Invalid option");
                     }
-                    finalVal = options.keySet().stream().toList().get(optionIndex);
+                    finalVal = options.keySet().stream().toList().get(optionIndex - 1);
                 } catch (NumberFormatException e) {
                     return new InputState(false, "Invalid option");
                 }
             }
-            System.out.println("YOU CHOSE: " + finalVal);
 
             // Validate String input
             InputState state = validator.validate(finalVal);

@@ -30,7 +30,7 @@ public class ParameterValidOptions {
         HashMap<String, String> options = new HashMap<>();
         try (DataScope<Gps, Integer> ds = new DataScope<>(Gps.class)) {
             for (Gps c: ds.getAll(RESULTS_LIMIT)) {
-                options.put(c.getPK().toString(), "");
+                options.put(c.getPK().toString(), "GPS Id: " +  c.getPK().toString());
             }
             ds.validateWork();
             return options;
@@ -44,7 +44,7 @@ public class ParameterValidOptions {
         HashMap<String, String> options = new HashMap<>();
         try (DataScope<EstadosGps, String> ds = new DataScope<>(EstadosGps.class)) {
             for (EstadosGps e: ds.getAll(RESULTS_LIMIT)) {
-                options.put(e.getPK(), "");
+                options.put(e.getPK(), "Estado GPS: " + e.getEstado());
             }
             ds.validateWork();
             return options;
@@ -58,7 +58,13 @@ public class ParameterValidOptions {
         HashMap<String, String> options = new HashMap<>();
         try (DataScope<Veiculo, String> ds = new DataScope<>(Veiculo.class)) {
             for (Veiculo v: ds.getAll(RESULTS_LIMIT)) {
-                options.put(v.getPK(), "Condutor: " + v.getNome_condutor());
+                options.put(v.getPK(),
+                        "Matrícula: " + v.getMatricula() +
+                        " | Número de alarmes: " + v.getNum_alarmes() +
+                        " | Estado GPS: " + v.getEstado_gps().getEstado() +
+                        " | Condutor: " + v.getNome_condutor() +
+                        " | Telefone do Condutor: " + v.getTelefone_condutor()
+                );
             }
             ds.validateWork();
             return options;

@@ -1,5 +1,5 @@
 package BusinessLogic.Handlers;
 
 public interface Handler {
-    void run();
+    void run() throws Exception;
 }

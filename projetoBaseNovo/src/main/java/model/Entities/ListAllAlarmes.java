@@ -15,6 +15,9 @@ import java.sql.Timestamp;
     name = "list_all_alarmes"
 )
 public class ListAllAlarmes implements Serializable, JPAEntity<NullType> {
+
+    public ListAllAlarmes() {}
+
     @Id
     @JoinColumn(name = "matricula", nullable = false)
     private Veiculo matricula;
@@ -25,11 +28,6 @@ public class ListAllAlarmes implements Serializable, JPAEntity<NullType> {
     private String longitude;
 
     private Timestamp marca_temporal;
-
-    @Override
-    public NullType getPK() {
-        return null;
-    }
 
     public Veiculo getMatricula() {
         return matricula;
@@ -69,5 +67,10 @@ public class ListAllAlarmes implements Serializable, JPAEntity<NullType> {
 
     public void setMarca_temporal(Timestamp marca_temporal) {
         this.marca_temporal = marca_temporal;
+    }
+
+    @Override
+    public NullType getPK() {
+        return null;
     }
 }

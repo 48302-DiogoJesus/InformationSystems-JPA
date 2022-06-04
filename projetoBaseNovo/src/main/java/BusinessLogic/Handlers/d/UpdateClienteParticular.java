@@ -14,12 +14,12 @@ import static Utils.Utils.CallProcedure;
 public class UpdateClienteParticular {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
-    public static void run() {
+    public static void run() throws Exception {
         Parameter nif = EntityParameters.NIF(false, true);
         Parameter cc = EntityParameters.CC(false);
         Parameter nome = EntityParameters.NOME(false);
         Parameter morada = EntityParameters.MORADA(false);
-        Parameter id_referenciador = EntityParameters.NIF(false, true);
+        Parameter id_referenciador = EntityParameters.REFERENCIADOR(false, true);
 
         Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(nif); add(cc); add(nome); add(morada); add(id_referenciador); }
@@ -35,6 +35,8 @@ public class UpdateClienteParticular {
                 ProcedureType.STORED_PROCEDURE,
                 ReturnType.VOID
         );
+
+        System.out.println("[DONE] Cliente Atualizado");
     }
 }
 

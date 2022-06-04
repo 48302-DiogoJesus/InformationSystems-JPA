@@ -30,6 +30,14 @@ public class EntityParameters {
         }
     }
 
+    public static Parameter<String> REFERENCIADOR(Boolean optional, Boolean showOptions) {
+        if (showOptions) {
+            return new Parameter<>("Referenciador", optional, InputValidators::NIF, String.class, ParameterValidOptions.Clientes());
+        } else {
+            return new Parameter<>("Referenciador", optional, InputValidators::NIF, String.class);
+        }
+    }
+
     public static Parameter<String> MORADA(Boolean optional) {
         return new Parameter<>("Morada", optional, InputValidators::MORADA, String.class);
     }

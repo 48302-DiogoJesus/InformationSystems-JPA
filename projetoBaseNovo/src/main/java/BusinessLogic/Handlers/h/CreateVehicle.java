@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CreateVehicle {
 
     // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
-    public static void run() {
+    public static void run() throws Exception {
         Parameter matricula = EntityParameters.MATRICULA(false, false);
         Parameter idCliente = EntityParameters.NIF(false, true);
         Parameter idGps = EntityParameters.GPSID(false, true);
@@ -30,11 +30,14 @@ public class CreateVehicle {
 
         Parameter[] args = { matricula, idCliente, idGps, estadoGps,
                 nomeCondutor,telefoneCondutor, numAlarmes };
+
         CallProcedure(
                 "create_veiculo",
                 args,
                 Utils.Utils.ProcedureType.STORED_PROCEDURE,
                 Utils.Utils.ReturnType.VOID
         );
+
+        System.out.println("[DONE] Veículo criado");
     }
 }

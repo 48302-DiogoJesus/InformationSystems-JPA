@@ -4,29 +4,21 @@ import DataScopes.DataScope;
 import model.Entities.EstadosGps;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ListEstadosGPS {
-    public static void run() {
+    public static void run() throws Exception {
         try (
-                DataScope<EstadosGps, String> ds_estado_gps = new DataScope(EstadosGps.class);
+                DataScope<EstadosGps, String> ds_estado_gps = new DataScope<>(EstadosGps.class);
         ) {
             List<EstadosGps> results = ds_estado_gps.getAll();
 
-            System.out.println("| Estados de GPS |");
+            System.out.println("| ESTADOS DE GPS |");
             for (EstadosGps estado : results) {
-                System.out.println(estado.getEstado());
+                System.out.println(" > " + estado.getEstado());
             }
 
             // Vote
             ds_estado_gps.validateWork();
-        } catch (Exception e) {
-            System.out.println("Application Exception: " + e.getMessage());
         }
-
-        System.out.println();
-        System.out.println("Press ENTER to continue...");
-        Scanner wait = new Scanner(System.in);
-        wait.nextLine();
     }
 }

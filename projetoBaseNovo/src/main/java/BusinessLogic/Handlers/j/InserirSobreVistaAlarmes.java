@@ -9,11 +9,13 @@ import model.Entities.Veiculo;
 import model.EntityParameters;
 
 import javax.lang.model.type.NullType;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class InserirSobreVistaAlarmes {
-    public static void run() {
+    public static void run() throws Exception {
         Parameter matricula = EntityParameters.MATRICULA(false, true);
         Parameter nomeCondutor = EntityParameters.NOMECONDUTOR(false);
         Parameter latitude = EntityParameters.LATITUDE(true);
@@ -31,20 +33,26 @@ public class InserirSobreVistaAlarmes {
         Parameter[] args = { matricula, nomeCondutor, latitude, longitude, marcaTemporal };
 
         try (
-            DataScope<ListAllAlarmes, NullType> ds_list_all_alarmes = new DataScope<>(ListAllAlarmes.class);
-            DataScope<Veiculo, String> ds_veiculo = new DataScope<>(Veiculo.class)
+                DataScope<ListAllAlarmes, NullType> ds_list_all_alarmes = new DataScope<>(ListAllAlarmes.class);
+                DataScope<Veiculo, String> ds_veiculo = new DataScope<>(Veiculo.class)
         ) {
             ListAllAlarmes newItem = new ListAllAlarmes();
             Veiculo v = ds_veiculo.getSingle(matricula.value.toString());
             newItem.setMatricula(v);
             newItem.setNome_condutor(nomeCondutor.value.toString());
-            newItem.setLatitude(latitude.value.toString());
-            newItem.setLongitude(longitude.value.toString());
-            newItem.setMarca_temporal(Timestamp.valueOf(marcaTemporal.value.toString()));
+            if (latitude.value != null)
+                newItem.setLatitude(latitude.value.toString());
+            if (longitude.value != null)
+                newItem.setLongitude(longitude.value.toString());
+            if (marcaTemporal.value != null)
+                newItem.setMarca_temporal(Timestamp.valueOf(marcaTemporal.value.toString()));
 
             ds_list_all_alarmes.create(newItem);
-        } catch (Exception e) {
-            System.out.println("Application Exception: " + e.getMessage());
+
+            // Vote
+            ds_list_all_alarmes.validateWork();
+            ds_veiculo.validateWork();
         }
+        System.out.println("[DONE] Alarme inserido sobre a vista");
     }
 }

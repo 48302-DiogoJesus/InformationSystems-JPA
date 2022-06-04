@@ -5,11 +5,13 @@ import Utils.UI_Utils;
 import Utils.Utils.*;
 import model.Entities.EstadosGps;
 import model.EntityParameters;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 
 public class RemoveEstadoGPS {
-    public static void run() {
+    public static void run() throws Exception {
 
         Parameter<String> estado = EntityParameters.ESTADOGPS(false, true);
 
@@ -20,17 +22,12 @@ public class RemoveEstadoGPS {
         if (!result)
             return;
 
-        try (
-                DataScope<EstadosGps, String> ds_estado_gps = new DataScope(EstadosGps.class);
-        ) {
-
+        try (DataScope<EstadosGps, String> ds_estado_gps = new DataScope<>(EstadosGps.class)) {
             ds_estado_gps.deleteById(estado.value.toString());
 
             // Vote
             ds_estado_gps.validateWork();
-
-        } catch (Exception e) {
-            System.out.println("Application Exception: " + e.getMessage());
         }
+        System.out.println("[DONE] Estado de GPS removido");
     }
 }
