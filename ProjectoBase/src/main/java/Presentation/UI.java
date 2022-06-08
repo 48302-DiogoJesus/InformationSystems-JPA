@@ -51,16 +51,15 @@ public class UI {
             }
 
             try  {
-                System.out.println(" > Type 'exit' to go back to the menu\n");
+                System.out.println("type 'exit' to go back to the menu\n");
                 command.handler.run();
-                waitEnter();
-
             } catch (Exception e) {
                 System.out.println();
                 System.out.println("[UNCAUGHT ERROR]: " + e.getMessage());
                 e.printStackTrace();
                 System.out.println();
             }
+            waitEnter();
         }
     }
 

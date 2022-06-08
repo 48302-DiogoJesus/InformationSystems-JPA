@@ -7,6 +7,7 @@ import static Utils.Utils.CallProcedure;
 import model.Entities.*;
 import model.EntityParameters;
 import Utils.Utils.Parameter;
+import org.postgresql.util.PGobject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,8 @@ public class CreateVehicle {
 
         Boolean result = UI_Utils.getMultipleInputs(new ArrayList<>() {
             {add(matricula); add(idCliente); add(idGps); add(estadoGps);
-                add(nomeCondutor); add(telefoneCondutor); add(numAlarmes);}
+                add(nomeCondutor); add(telefoneCondutor); add(numAlarmes);
+                add(longitude); add(latitude); add(raio);}
         });
 
         if (!result)
@@ -48,17 +50,19 @@ public class CreateVehicle {
             if (cliente == null) {
                 throw new Exception("O cliente com o NIF: " + idCliente + " não existe!");
             }
+
             boolean isClienteParticular = ds_cliente_particular.getSingle(cliente.getPK()) != null;
 
             // Se for cliente particular verificar se já tem o número máximo de veículos permitidos
             HashMap<String, Object> queryCarsNumber = new HashMap<>();
-            queryCarsNumber.put("id_cliente", idCliente.value);
+            queryCarsNumber.put("id_cliente", "123443211");
             if (isClienteParticular) {
-                List<Veiculo> veiculos = ds_veiculo.get(queryCarsNumber);
+                List veiculos = ds_veiculo.getNative(queryCarsNumber);
                 if (veiculos.size() >= 3) {
                     throw new Exception("Este cliente já atingiu o número máximo de veículos permitidos para um cliente particular!");
                 }
             }
+
             EstadosGps eg = ds_estados_gps.getSingle(estadoGps.value.toString());
             Gps gps = ds_gps.getSingle(Integer.parseInt(idGps.value.toString()));
             // Criar veículo

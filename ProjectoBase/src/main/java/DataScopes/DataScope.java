@@ -1,9 +1,11 @@
 package DataScopes;
 
 import jakarta.persistence.*;
+import org.postgresql.util.PGobject;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("rawtypes")
 public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
@@ -127,6 +129,22 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
             i++;
         }
         return (List<T>) query.getResultList();
+    }
+
+    public List<PGobject> getNative(HashMap<String, Object> queryMap) {
+        StringBuilder queryString= new StringBuilder("select a from " + javaClass.getSimpleName().toLowerCase() + " a where ");
+        int i = 1;
+        for (Map.Entry<String, Object> entry: queryMap.entrySet()) {
+            String appendText = "a." + entry.getKey() + " = '" + entry.getValue() + "'";
+
+            if (i != queryMap.size())
+                appendText += " and ";
+
+            queryString.append(appendText);
+            i++;
+        }
+        Query query = em.createNativeQuery(queryString.toString());
+        return query.getResultList();
     }
 
     public void delete(T item) throws Exception {
