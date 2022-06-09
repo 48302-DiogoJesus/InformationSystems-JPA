@@ -13,7 +13,6 @@ import static Utils.Utils.CallProcedure;
 
 public class UpdateClienteParticular {
 
-    // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() throws Exception {
         Parameter nif = EntityParameters.NIF(false, true);
         Parameter cc = EntityParameters.CC(false);

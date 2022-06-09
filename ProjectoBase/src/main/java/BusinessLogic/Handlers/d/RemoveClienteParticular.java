@@ -12,7 +12,7 @@ import model.EntityParameters;
 import static Utils.Utils.CallProcedure;
 
 public class RemoveClienteParticular {
-    // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
+
     public static void run() throws Exception {
         Parameter nif = EntityParameters.NIF(false, true);
 

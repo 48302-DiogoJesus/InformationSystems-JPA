@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class CreateVehicleWithProcedure {
 
-    // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() throws Exception {
         Parameter matricula = EntityParameters.MATRICULA(false, false);
         Parameter idCliente = EntityParameters.NIF(false, true);

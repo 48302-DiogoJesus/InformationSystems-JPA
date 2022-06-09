@@ -1,12 +1,17 @@
 package BusinessLogic.Handlers.f;
 
 import DataScopes.DataScope;
+import jakarta.persistence.LockModeType;
 import model.Entities.*;
 
 import java.util.List;
+import java.util.Scanner;
 
+/**
+ *
+ * */
 public class HandleRegistosWithOptimisticLocking {
-    // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
+
     public static void run() throws Exception {
 
         try (
@@ -21,12 +26,12 @@ public class HandleRegistosWithOptimisticLocking {
 
             for (RegistoNProc registoNProc: RegistosNProc) {
                 Integer registoNProcID = registoNProc.getId_registo().getPK();
-                Registo registo = ds_registo.getSingle(registoNProcID);
+                Registo registo = ds_registo.getSingle(registoNProcID, LockModeType.OPTIMISTIC);
 
                 if (
-                        registo.getLongitude() == null ||
-                        registo.getLatitude() == null ||
-                        ds_gps.getSingle(registo.getId_gps().getPK()) == null
+                    registo.getLongitude() == null ||
+                    registo.getLatitude() == null ||
+                    ds_gps.getSingle(registo.getId_gps().getPK()) == null
                 ) {
                     // INVÁLIDO -> INVÁLIDOS
 
@@ -46,6 +51,8 @@ public class HandleRegistosWithOptimisticLocking {
                 // JÁ FOI PROCESSADO -> Apagar dos não processados
                 ds_registo_n_proc.deleteById(registo.getPK());
             }
+
+            (new Scanner(System.in)).nextLine();
 
             ds_registo.validateWork();
             ds_registo_n_proc.validateWork();

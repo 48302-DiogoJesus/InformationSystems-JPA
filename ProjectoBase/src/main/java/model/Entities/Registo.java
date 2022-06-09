@@ -29,6 +29,10 @@ public class Registo implements Serializable, JPAEntity<Integer> {
 
   private String latitude;
 
+  @Version
+  @Column(name="vers")
+  private Integer vers;
+
   private Timestamp marca_temporal;
 
   public Registo() {
@@ -77,5 +81,13 @@ public class Registo implements Serializable, JPAEntity<Integer> {
   @Override
   public Integer getPK() {
     return getId();
+  }
+
+  public Integer getVers() {
+    return vers;
+  }
+
+  public void setVers(Integer vers) {
+    this.vers = vers;
   }
 }

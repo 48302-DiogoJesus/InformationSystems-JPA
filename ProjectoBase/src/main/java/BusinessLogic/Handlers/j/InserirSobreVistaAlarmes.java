@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class InserirSobreVistaAlarmes {
+
     public static void run() throws Exception {
         Parameter matricula = EntityParameters.MATRICULA(false, true);
         Parameter nomeCondutor = EntityParameters.NOMECONDUTOR(false);

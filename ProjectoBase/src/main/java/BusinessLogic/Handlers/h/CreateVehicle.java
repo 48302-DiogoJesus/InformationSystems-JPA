@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class CreateVehicle {
 
-    // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() throws Exception {
         Parameter matricula = EntityParameters.MATRICULA(false, false);
         Parameter idCliente = EntityParameters.NIF(false, true);

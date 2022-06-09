@@ -43,6 +43,7 @@ public class UI {
         // 2.a)
         Commands.put(14, new Command("Processamento de registos (Optimistic Locking)", BusinessLogic.handleRegistosWOptimisticLocking));
 
+        // Exit Command
         Commands.put(15, new Command("Exit Program", Exit::run));
     }
 

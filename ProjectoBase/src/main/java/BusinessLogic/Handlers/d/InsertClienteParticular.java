@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class InsertClienteParticular {
 
-    // IGNORE ARGS FOR NOW, MAYBE REMOVE LATER
     public static void run() throws Exception {
         Parameter nif = EntityParameters.NIF(false, false);
         Parameter cc = EntityParameters.CC(false);

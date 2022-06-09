@@ -5,6 +5,7 @@ import Utils.Utils.Parameter;
 import static Utils.Utils.CallProcedure;
 
 public class DeleteRegistosInvalidos {
+
     public static void run() throws Exception {
         CallProcedure(
                 "remove_reg_invalidos",

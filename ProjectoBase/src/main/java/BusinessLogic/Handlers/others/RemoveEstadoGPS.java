@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 
 public class RemoveEstadoGPS {
+
     public static void run() throws Exception {
 
         Parameter<String> estado = EntityParameters.ESTADOGPS(false, true);

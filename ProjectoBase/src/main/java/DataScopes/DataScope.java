@@ -1,7 +1,6 @@
 package DataScopes;
 
 import jakarta.persistence.*;
-import org.eclipse.persistence.annotations.OptimisticLockingType;
 import org.postgresql.util.PGobject;
 
 import java.util.HashMap;
@@ -100,9 +99,20 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
         return items;
     }
 
+    public List<T> getAll(LockModeType lockModeType) {
+        Query q = em.createQuery("select a from " + entityName + " a", javaClass);
+        q.setLockMode(lockModeType);
+        return (List<T>) q.getResultList();
+    }
+
     public List<T> getAll(int limit) {
-        List<T> items = em.createQuery("select a from " + entityName + " a", javaClass).setMaxResults(limit).getResultList();
-        return items;
+        return em.createQuery("select a from " + entityName + " a", javaClass).setMaxResults(limit).getResultList();
+    }
+
+    public List<T> getAll(int limit, LockModeType lockModeType) {
+        Query q = em.createQuery("select a from " + entityName + " a", javaClass).setMaxResults(limit);
+        q.setLockMode(lockModeType);
+        return (List<T>) q.getResultList();
     }
 
     public T getSingle(K id) {
