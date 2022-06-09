@@ -23,6 +23,7 @@ public class UI {
     static HashMap<Integer, Command> Commands = new HashMap<>();
 
     static {
+        // Operações Base (1a))
         Commands.put(1, new Command("Inserir Cliente Particular", BusinessLogic.insertClienteParticular));
         Commands.put(2, new Command("Remover Cliente Particular", BusinessLogic.removeClienteParticular));
         Commands.put(3, new Command("Atualizar Cliente Particular", BusinessLogic.updateClienteParticular));
@@ -36,7 +37,10 @@ public class UI {
         Commands.put(11, new Command("Listar Alarmes", BusinessLogic.listAlarmes));
         Commands.put(12, new Command("Apagar Registos Inválidos", BusinessLogic.deleteRegistosInvalidos));
 
+        // Outras alíneas
+        // 1.b)
         Commands.put(13, new Command("Inserir Veiculo (Procedimento Armazenado)", BusinessLogic.createVehicleWProc));
+        // 2.a)
         Commands.put(14, new Command("Processamento de registos (Optimistic Locking)", BusinessLogic.handleRegistosWOptimisticLocking));
 
         Commands.put(15, new Command("Exit Program", Exit::run));
