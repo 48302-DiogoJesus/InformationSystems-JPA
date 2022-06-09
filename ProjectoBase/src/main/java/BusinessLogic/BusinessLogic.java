@@ -6,7 +6,9 @@ import BusinessLogic.Handlers.d.InsertClienteParticular;
 import BusinessLogic.Handlers.d.UpdateClienteParticular;
 import BusinessLogic.Handlers.e.TotalDeAlarmes;
 import BusinessLogic.Handlers.f.HandleRegistos;
+import BusinessLogic.Handlers.f.HandleRegistosWithOptimisticLocking;
 import BusinessLogic.Handlers.h.CreateVehicle;
+import BusinessLogic.Handlers.h.CreateVehicleWithProcedure;
 import BusinessLogic.Handlers.j.InserirSobreVistaAlarmes;
 import BusinessLogic.Handlers.k.DeleteRegistosInvalidos;
 import BusinessLogic.Handlers.others.InsertEstadoGPS;
@@ -26,9 +28,10 @@ public class BusinessLogic
 
     // f)
     static public Handler handleRegistos = HandleRegistos::run;
-
+    static public Handler handleRegistosWOptimisticLocking = HandleRegistosWithOptimisticLocking::run;
     // h)
     static public Handler createVehicle = CreateVehicle::run;
+    static public Handler createVehicleWProc = CreateVehicleWithProcedure::run;
 
     // Estados GPS
     static public Handler insertEstadoGPS = InsertEstadoGPS::run;

@@ -1,6 +1,7 @@
 package DataScopes;
 
 import jakarta.persistence.*;
+import org.eclipse.persistence.annotations.OptimisticLockingType;
 import org.postgresql.util.PGobject;
 
 import java.util.HashMap;
@@ -105,9 +106,11 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
     }
 
     public T getSingle(K id) {
-        T item = em.find(javaClass, id);
-        // NULL if not found
-        return item;
+        return em.find(javaClass, id);
+    }
+
+    public T getSingle(K id, LockModeType lockModeType) {
+        return em.find(javaClass, id, lockModeType);
     }
 
     public List<T> get(HashMap<String, Object> queryMap) {
@@ -123,6 +126,28 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
             i++;
         }
         TypedQuery query = em.createQuery(queryString.toString(), javaClass);
+        i = 1;
+        for (Object value: queryMap.values()) {
+            query.setParameter("column" + i, value);
+            i++;
+        }
+        return (List<T>) query.getResultList();
+    }
+
+    public List<T> get(HashMap<String, Object> queryMap, LockModeType lockModeType) {
+        StringBuilder queryString= new StringBuilder("select a from " + entityName + " a where ");
+        int i = 1;
+        for (String key: queryMap.keySet()) {
+            String appendText = "a." + key + " = :column" + i;
+
+            if (i != queryMap.size())
+                appendText += " and ";
+
+            queryString.append(appendText);
+            i++;
+        }
+        TypedQuery query = em.createQuery(queryString.toString(), javaClass);
+        query.setLockMode(lockModeType);
         i = 1;
         for (Object value: queryMap.values()) {
             query.setParameter("column" + i, value);
@@ -147,6 +172,23 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
         return query.getResultList();
     }
 
+    public List<PGobject> getNative(HashMap<String, Object> queryMap, LockModeType lockModeType) {
+        StringBuilder queryString = new StringBuilder("select a from " + javaClass.getSimpleName().toLowerCase() + " a where ");
+        int i = 1;
+        for (Map.Entry<String, Object> entry : queryMap.entrySet()) {
+            String appendText = "a." + entry.getKey() + " = '" + entry.getValue() + "'";
+
+            if (i != queryMap.size())
+                appendText += " and ";
+
+            queryString.append(appendText);
+            i++;
+        }
+        Query query = em.createNativeQuery(queryString.toString());
+        query.setLockMode(lockModeType);
+        return query.getResultList();
+    }
+
     public void delete(T item) throws Exception {
         // Para garantir que caso esta transação/sub-transações tenham criado este recurso ele seja visível
         em.flush();
@@ -157,6 +199,14 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
     public void deleteById(K id) throws Exception {
         em.flush();
         T item = em.find(javaClass, id);
+        if (item == null)
+            throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
+        em.remove(item);
+    }
+
+    public void deleteById(K id, LockModeType lockModeType) throws Exception {
+        em.flush();
+        T item = em.find(javaClass, id, lockModeType);
         if (item == null)
             throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
         em.remove(item);
@@ -173,8 +223,9 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
         if (item == null)
             throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
         /*
-         Ao chamar este função assume-se que os campos já estão atualizados (Ex: al.setId_registo(2))
-         Desta forma, quando a transação fizer commit (invocando .close()) a entidade será atualizada na base de dados
+        > CHANGE TRACKING <
+        Ao chamar este função assume-se que os campos já estão atualizados (Ex: al.setId_registo(2))
+        Desta forma, quando a transação fizer commit (invocando .close()) a entidade será atualizada na base de dados
          */
     }
 

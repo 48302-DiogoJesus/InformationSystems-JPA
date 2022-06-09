@@ -27,7 +27,7 @@ public class UI {
         Commands.put(2, new Command("Remover Cliente Particular", BusinessLogic.removeClienteParticular));
         Commands.put(3, new Command("Atualizar Cliente Particular", BusinessLogic.updateClienteParticular));
         Commands.put(4, new Command("Total de alarmes para um veículo", BusinessLogic.totalDeAlarmes));
-        Commands.put(5, new Command("Processamento de registos não processados", BusinessLogic.handleRegistos));
+        Commands.put(5, new Command("Processamento de registos", BusinessLogic.handleRegistos));
         Commands.put(6, new Command("Inserir Veiculo", BusinessLogic.createVehicle));
         Commands.put(7, new Command("Inserir Estado GPS", BusinessLogic.insertEstadoGPS));
         Commands.put(8, new Command("Remover Estado GPS", BusinessLogic.removeEstadoGPS));
@@ -35,7 +35,11 @@ public class UI {
         Commands.put(10, new Command("Inserir sobre a vista de Alarmes", BusinessLogic.inserirSobreVistaAlarmes));
         Commands.put(11, new Command("Listar Alarmes", BusinessLogic.listAlarmes));
         Commands.put(12, new Command("Apagar Registos Inválidos", BusinessLogic.deleteRegistosInvalidos));
-        Commands.put(13, new Command("Exit Program", Exit::run));
+
+        Commands.put(13, new Command("Inserir Veiculo (Procedimento Armazenado)", BusinessLogic.createVehicleWProc));
+        Commands.put(14, new Command("Processamento de registos (Optimistic Locking)", BusinessLogic.handleRegistosWOptimisticLocking));
+
+        Commands.put(15, new Command("Exit Program", Exit::run));
     }
 
     public static void launch() {
