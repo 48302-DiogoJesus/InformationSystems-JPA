@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Table(
     name = "registo_n_proc"
 )
-public class RegistoNProc implements Serializable, JPAEntity<Registo> {
+public class RegistoNProc implements Serializable, JPAEntity<Integer> {
   @Id
   @JoinColumn(name = "id_registo", nullable = false)
   @OneToOne(fetch = FetchType.LAZY)
@@ -27,7 +27,7 @@ public class RegistoNProc implements Serializable, JPAEntity<Registo> {
   }
 
   @Override
-  public Registo getPK() {
-    return getId_registo();
+  public Integer getPK() {
+    return getId_registo().getPK();
   }
 }

@@ -11,7 +11,7 @@ public class HandleRegistosWithOptimisticLocking {
 
         try (
                 DataScope<Registo, Integer> ds_registo = new DataScope<>(Registo.class);
-                DataScope<RegistoNProc, Registo> ds_registo_n_proc = new DataScope<>(RegistoNProc.class);
+                DataScope<RegistoNProc, Integer> ds_registo_n_proc = new DataScope<>(RegistoNProc.class);
                 DataScope<RegistoInvalido, Integer> ds_registo_invalido = new DataScope<>(RegistoInvalido.class);
                 DataScope<RegistoProc, Integer> ds_registo_proc = new DataScope<>(RegistoProc.class);
                 DataScope<Gps, Integer> ds_gps = new DataScope<>(Gps.class)
@@ -44,7 +44,7 @@ public class HandleRegistosWithOptimisticLocking {
                 }
 
                 // JÁ FOI PROCESSADO -> Apagar dos não processados
-                ds_registo_n_proc.delete(registoNProc);
+                ds_registo_n_proc.deleteById(registo.getPK());
             }
 
             ds_registo.validateWork();
