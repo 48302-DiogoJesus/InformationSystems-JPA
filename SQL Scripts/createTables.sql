@@ -94,6 +94,8 @@ $$
 			latitude varchar(20),
 			marca_temporal timestamp,
 			
+			vers int default 0,
+			
 			primary key(id),
 			foreign key (id_gps) references gps(id)
 		);

@@ -52,7 +52,8 @@ public class HandleRegistosWithOptimisticLocking {
                 ds_registo_n_proc.deleteById(registo.getPK());
             }
 
-            (new Scanner(System.in)).nextLine();
+            // FOR TESTING
+            // (new Scanner(System.in)).nextLine();
 
             ds_registo.validateWork();
             ds_registo_n_proc.validateWork();

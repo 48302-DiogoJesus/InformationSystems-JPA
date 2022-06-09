@@ -29,8 +29,6 @@ public class InserirSobreVistaAlarmes {
         if (!result)
             return;
 
-        Parameter[] args = { matricula, nomeCondutor, latitude, longitude, marcaTemporal };
-
         try (
                 DataScope<ListAllAlarmes, NullType> ds_list_all_alarmes = new DataScope<>(ListAllAlarmes.class);
                 DataScope<Veiculo, String> ds_veiculo = new DataScope<>(Veiculo.class)
