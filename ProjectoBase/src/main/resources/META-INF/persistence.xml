@@ -4,10 +4,19 @@
   <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level" value="OFF"/>
+
       <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="jakarta.persistence.jdbc.user" value="postgres"/>
       <property name="jakarta.persistence.jdbc.password" value="stiva"/>
       <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+      <!-- <property name="eclipselink.logging.level" value="FINER"/> -->
+      <!-- <property name="eclipselink.logging.parameters" value="true"/> -->
+      <!-- <property name="eclipselink.logging.level.connection" value="FINEST" /> -->
+      <!--  			<property name="eclipselink.logging.level.cache" value="FINE" />  -->
+      <!--  			<property name="eclipselink.logging.level.sequencing" value="FINEST" />  -->
+      <!-- <property name="eclipselink.logging.level.transaction" value="FINEST" /> -->
+      <!-- <property name="eclipselink.logging.level.query" value="FINEST" /> -->
     </properties>
   </persistence-unit>
 </persistence>

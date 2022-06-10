@@ -104,6 +104,8 @@ $$
 			-- PK
 			id_registo int,
 			
+			vers int default 0,
+			
 			primary key(id_registo),
 			foreign key(id_registo) references registo(id) on delete cascade
 		);
@@ -113,6 +115,8 @@ $$
 			-- PK
 			id_registo int,
 			
+			vers int default 0,
+			
 			primary key(id_registo),
 			foreign key(id_registo) references registo(id) on delete cascade
 		);
@@ -120,6 +124,8 @@ $$
 		create table if not exists registo_invalido(
 			-- PK
 			id_registo int,
+			
+			vers int default 0,
 			
 			primary key(id_registo),
 			foreign key(id_registo) references registo(id) on delete cascade

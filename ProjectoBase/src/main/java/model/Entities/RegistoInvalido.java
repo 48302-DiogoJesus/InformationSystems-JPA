@@ -15,6 +15,10 @@ public class RegistoInvalido implements Serializable, JPAEntity<Integer> {
   @OneToOne(fetch = FetchType.LAZY)
   private Registo id_registo;
 
+  @Version
+  @Column(name="vers")
+  private Integer vers;
+
   public RegistoInvalido() {
   }
 

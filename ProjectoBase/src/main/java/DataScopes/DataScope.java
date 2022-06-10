@@ -15,7 +15,7 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
 
     ThreadLocal<Session> threadLocal = SessionThreadLocal.threadLocal;
 
-    EntityManager em;
+    public EntityManager em;
     Class<T> javaClass;
     String entityName;
 
@@ -59,11 +59,16 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
                 else {
                     threadLocal.get().getEm().getTransaction().rollback();
                 }
-            } catch (PersistenceException e) {
+            }
+            catch (PersistenceException e) {
                 String expected = "org.postgresql.util.PSQLException: ERROR: ";
                 String message = e.getMessage();
                 String PSQLMessage = message.substring(message.indexOf(expected) + expected.length()).split("\\r?\\n")[0];
-                throw new Exception("[DB ERROR] ON COMMIT/ROLLBACK: " + PSQLMessage);
+                if (PSQLMessage.contains("OptimisticLockException")) {
+                    throw new Exception("[DB ERROR] OPTIMISTIC LOCK EXCEPTION: Please try again later");
+                } else {
+                    throw new Exception("[DB ERROR] ON COMMIT/ROLLBACK: " + PSQLMessage);
+                }
             }
             // If the commit/rollback fails we still want to close the threadLocal
             finally {
@@ -199,15 +204,22 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
         return query.getResultList();
     }
 
+    public void delete(T item, LockModeType lockModeType) throws Exception {
+        // Para garantir que caso esta transação/sub-transações tenham criado este recurso ele seja visível
+        // em.flush();
+        K id = item.getPK();
+        deleteById(id, lockModeType);
+    }
+
     public void delete(T item) throws Exception {
         // Para garantir que caso esta transação/sub-transações tenham criado este recurso ele seja visível
-        em.flush();
+        // em.flush();
         K id = item.getPK();
         deleteById(id);
     }
 
     public void deleteById(K id) throws Exception {
-        em.flush();
+        // em.flush();
         T item = em.find(javaClass, id);
         if (item == null)
             throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
@@ -215,7 +227,7 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
     }
 
     public void deleteById(K id, LockModeType lockModeType) throws Exception {
-        em.flush();
+        // em.flush();
         T item = em.find(javaClass, id, lockModeType);
         if (item == null)
             throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
@@ -229,7 +241,7 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
          */
         em.flush();
         K id = c.getPK();
-        T item = em.find(javaClass, id, LockModeType.PESSIMISTIC_WRITE);
+        T item = em.find(javaClass, id);
         if (item == null)
             throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
         /*
@@ -239,8 +251,33 @@ public class DataScope<T extends JPAEntity<K>, K> implements AutoCloseable {
          */
     }
 
+    public void update(T c, LockModeType lockModeType) throws Exception {
+        /*
+         Garantir que neste momento a entidade ainda existe no sistema. Caso não exista será lançada exceção levando a
+         não votar implicando ROLLBACK on CLOSE (.close())
+         */
+        // em.flush();
+        K id = c.getPK();
+        T item = em.find(javaClass, id, lockModeType);
+        if (item == null)
+            throw new java.lang.IllegalAccessException("O item que tentou remover não existe");
+        em.lock(c, lockModeType);
+        /*
+        > CHANGE TRACKING <
+        Ao chamar este função assume-se que os campos já estão atualizados (Ex: al.setId_registo(2))
+        Desta forma, quando a transação fizer commit (invocando .close()) a entidade será atualizada na base de dados
+         */
+    }
+
+    public void create(T item, LockModeType lockModeType) {
+        // em.flush();
+        // Create
+        em.persist(item);
+        em.lock(item, lockModeType);
+    }
+
     public void create(T item) {
-        em.flush();
+        // em.flush();
         // Create
         em.persist(item);
     }
