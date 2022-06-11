@@ -15,9 +15,6 @@ public class RegistoProc implements Serializable, JPAEntity<Integer> {
   @OneToOne(fetch = FetchType.LAZY)
   private Registo id_registo;
 
-  @Version
-  @Column(name="vers")
-  private Integer vers;
 
   public RegistoProc() {
   }

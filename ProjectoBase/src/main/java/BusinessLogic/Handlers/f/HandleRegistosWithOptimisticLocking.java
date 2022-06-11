@@ -22,7 +22,7 @@ public class HandleRegistosWithOptimisticLocking {
                 DataScope<Gps, Integer> ds_gps = new DataScope<>(Gps.class)
         ) {
             //  REGISTOS NÃO PROCESSADOS -> Obter lista de registos não processados
-            List<RegistoNProc> RegistosNProc = ds_registo_n_proc.getAll(LockModeType.OPTIMISTIC);
+            List<RegistoNProc> RegistosNProc = ds_registo_n_proc.getAll();
 
             for (RegistoNProc registoNProc: RegistosNProc) {
                 Integer registoNProcID = registoNProc.getId_registo().getPK();
@@ -38,22 +38,22 @@ public class HandleRegistosWithOptimisticLocking {
                     RegistoInvalido ri = new RegistoInvalido();
                     ri.setId_registo(registo);
 
-                    ds_registo_invalido.create(ri, LockModeType.OPTIMISTIC);
+                    ds_registo_invalido.create(ri);
                 } else {
                     // VÁLIDO -> PROCESSADOS
 
                     RegistoProc rp = new RegistoProc();
                     rp.setId_registo(registo);
 
-                    ds_registo_proc.create(rp, LockModeType.OPTIMISTIC);
+                    ds_registo_proc.create(rp);
                 }
 
                 // JÁ FOI PROCESSADO -> Apagar dos não processados
-                ds_registo_n_proc.delete(registoNProc, LockModeType.OPTIMISTIC);
+                ds_registo_n_proc.delete(registoNProc);
             }
 
-            // FOR TESTING
-            (new Scanner(System.in)).nextLine();
+            // FOR TESTING OPTIMISTIC LOCK EXCEPTION SITUATIONS
+            // (new Scanner(System.in)).nextLine();
 
             ds_registo.validateWork();
             ds_registo_n_proc.validateWork();

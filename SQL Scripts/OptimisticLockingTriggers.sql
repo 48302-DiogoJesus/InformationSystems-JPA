@@ -16,18 +16,3 @@ create or replace trigger GL_Opt
 before insert or update on registo
 for each row
 execute function f_opt_lock();
-
-create or replace trigger GL_Opt
-before insert or update on registo_n_proc
-for each row
-execute function f_opt_lock();
-
-create or replace trigger GL_Opt
-before insert or update on registo_invalido
-for each row
-execute function f_opt_lock();
-
-create or replace trigger GL_Opt
-before insert or update on registo_proc
-for each row
-execute function f_opt_lock();
