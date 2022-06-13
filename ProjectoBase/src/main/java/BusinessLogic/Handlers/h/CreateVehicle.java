@@ -4,6 +4,7 @@ import DataScopes.DataScope;
 import Utils.UI_Utils;
 import static Utils.Utils.CallProcedure;
 
+import jakarta.persistence.LockModeType;
 import model.Entities.*;
 import model.EntityParameters;
 import Utils.Utils.Parameter;
@@ -50,13 +51,16 @@ public class CreateVehicle {
                 throw new Exception("O cliente com o NIF: " + idCliente + " não existe!");
             }
 
-            boolean isClienteParticular = ds_cliente_particular.getSingle(cliente.getPK()) != null;
+            boolean isClienteParticular = ds_cliente_particular.getSingle(cliente.getPK(), LockModeType.PESSIMISTIC_READ) != null;
 
             // Se for cliente particular verificar se já tem o número máximo de veículos permitidos
             HashMap<String, Object> queryCarsNumber = new HashMap<>();
             queryCarsNumber.put("id_cliente", "123443211");
             if (isClienteParticular) {
                 List veiculos = ds_veiculo.getNative(queryCarsNumber);
+                // TODO: Deviamos evitar a inserção de veículos sobre este cliente.
+                //  Pode acontecer a situação em que é inserido um veículo após esta
+                //  verificação e o cliente ficar com mais de 3 veículos
                 if (veiculos.size() >= 3) {
                     throw new Exception("Este cliente já atingiu o número máximo de veículos permitidos para um cliente particular!");
                 }

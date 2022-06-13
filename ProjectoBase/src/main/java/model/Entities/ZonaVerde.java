@@ -13,7 +13,7 @@ import java.lang.String;
 public class ZonaVerde implements Serializable, JPAEntity<Integer> {
   @Id
   @GeneratedValue(
-      strategy = GenerationType.SEQUENCE
+      strategy = GenerationType.IDENTITY
   )
   @Column(
       nullable = false

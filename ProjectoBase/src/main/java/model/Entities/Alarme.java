@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Alarme implements Serializable, JPAEntity<Integer> {
   @Id
   @GeneratedValue(
-      strategy = GenerationType.SEQUENCE
+      strategy = GenerationType.IDENTITY
   )
   @Column(
       nullable = false

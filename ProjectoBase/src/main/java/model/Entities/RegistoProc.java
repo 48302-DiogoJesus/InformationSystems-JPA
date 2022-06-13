@@ -15,7 +15,6 @@ public class RegistoProc implements Serializable, JPAEntity<Integer> {
   @OneToOne(fetch = FetchType.LAZY)
   private Registo id_registo;
 
-
   public RegistoProc() {
   }
 

@@ -63,7 +63,8 @@ public class UI {
                 System.out.println("type 'exit' to go back to the menu\n");
                 command.handler.run();
             } catch (Exception e) {
-                System.out.println("[UNCAUGHT ERROR]: " + e.getMessage());
+                System.out.println(e.getMessage());
+                // FOR DEBUG
                 // e.printStackTrace();
             }
             waitEnter();
